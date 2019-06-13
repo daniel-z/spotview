@@ -6,7 +6,17 @@ export interface PlayerConfig {
     onError: (type: string, data: object) => void;
     onReady: (type: string, data: object) => void;
     onOffline: (type: string, data: object) => void;
-    onStateChange: (type: string, data: object) => void;
+    onStateChange: (type: string, playerState: PlayerState) => void;
+}
+
+export interface PlayerState {
+    track_window?: {
+      current_track?: {
+        album?: {
+          images?: string[]
+        }
+      }
+    };
 }
 
 export enum PlayerEvents {
@@ -52,7 +62,7 @@ export class Player {
         this.spotify = this.windowRef.Spotify;
         this.player = new this.windowRef.Spotify.Player({
             name: 'SPOTVIEW',
-            getOAuthToken: (cb) => {
+            getOAuthToken: (cb: (token: string) => void) => {
                 cb(this.token);
             }
         });
@@ -76,9 +86,10 @@ export class Player {
         this.player.addListener(PlayerEvents.ACCOUNT_ERROR, (data: object) => this.onError(PlayerEvents.ACCOUNT_ERROR, data));
         this.player.addListener(PlayerEvents.PLAYBACK_ERROR, (data: object) => this.onError(PlayerEvents.PLAYBACK_ERROR, data));
 
-        this.player.addListener(PlayerEvents.READY, (data: object) => this.onError(PlayerEvents.READY, data));
-        this.player.addListener(PlayerEvents.NOT_READY, (data: object) => this.onError(PlayerEvents.NOT_READY, data));
-        this.player.addListener(PlayerEvents.PLAYER_STATE_CHANGED, (data: object) => this.onError(PlayerEvents.PLAYER_STATE_CHANGED, data));
+        this.player.addListener(PlayerEvents.READY, (data: object) => this.onReady(PlayerEvents.READY, data));
+        this.player.addListener(PlayerEvents.NOT_READY, (data: object) => this.onOffline(PlayerEvents.NOT_READY, data));
+        this.player.addListener(PlayerEvents.PLAYER_STATE_CHANGED,
+            (data: PlayerState) => this.onStateChange(PlayerEvents.PLAYER_STATE_CHANGED, data));
     }
 
 }
