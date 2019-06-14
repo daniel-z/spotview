@@ -1,3 +1,7 @@
-<div>
-    <img [src]=bgImage alt=" ">
+<div class="viewer-container" [ngStyle]="{
+  'width': getWindowWidthtPx(),
+  'height': getWindowHeightPx(),
+  'background-image': getBgImageStyle()
+}">
+    <img *ngIf="true" [src]=bgImage alt=" ">
 </div>

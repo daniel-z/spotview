@@ -13,7 +13,9 @@ export class ViewerComponent implements OnInit {
   private playerConfig: PlayerConfig;
   private readonly token = environment.token;
   private playerState: PlayerState;
-  bgImage: string;
+  windowRef: any = window;
+  // tslint:disable-next-line: max-line-length
+  bgImage = 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2550&q=80';
 
   constructor(private changeDetector: ChangeDetectorRef) {
     this.onStateChange = this.onStateChange.bind(this);
@@ -25,7 +27,7 @@ export class ViewerComponent implements OnInit {
     this.playerConfig = {
       token: this.token,
       name: 'Spot Player',
-      windowRef: window,
+      windowRef: this.windowRef,
       onError: this.onError,
       onReady: this.onReady,
       onOffline: this.onOffline,
@@ -36,7 +38,7 @@ export class ViewerComponent implements OnInit {
   }
 
   onError(type: string, data: object) {
-    console.log(type, data);
+    console.error(type, data);
   }
 
   onReady(type: string, data: object) {
@@ -57,6 +59,17 @@ export class ViewerComponent implements OnInit {
     const images = get(this.playerState, 'track_window.current_track.album.images');
     this.bgImage = images && images[2] ? images[2].url : null;
     this.changeDetector.detectChanges();
+  }
+
+  getBgImageStyle(): string {
     console.log(this.bgImage);
+    return `url('${this.bgImage}')`;
+  }
+
+  getWindowHeightPx(): string {
+    return `${this.windowRef.window.innerHeight}px`;
+  }
+  getWindowWidthtPx(): string {
+    return `${this.windowRef.window.innerWidth}px`;
   }
 }
