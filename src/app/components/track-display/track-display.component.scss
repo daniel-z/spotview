@@ -1,0 +1,99 @@
+@import "../../styles/variables";
+@import "../../styles/media-queries";
+@import "../../styles/utils";
+
+/*  track art variables  */
+// size
+$track-disp-height-xs: 100%;
+$track-disp-width-xs: 100%;
+$track-disp-height-md: 500px;
+$track-disp-width-md: 500px;
+$track-disp-height-xl: 500px;
+$track-disp-width-xl: 500px;
+
+$track-overlay-gradient-a: $color-red;
+$track-overlay-gradient-b: $color-blue;
+
+.track {
+  &-overlay {
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &-display {
+    @include center-bg();
+    width: $track-disp-height-xs;
+    height: $track-disp-height-xs;
+
+    @include md-up {
+      width: $track-disp-height-md;
+      height: $track-disp-height-md;
+    }
+
+    @include xl-only {
+      width: $track-disp-height-xl;
+      height: $track-disp-height-xl;
+    }
+
+    display: block;
+    opacity: 0.1;
+    transition: opacity 1s;
+    position: relative;
+
+    &:hover {
+      opacity: 1;
+      transition: opacity 1s;
+
+      &-overlay {
+        background-image: linear-gradient(
+          to top,
+          $track-overlay-gradient-a,
+          $track-overlay-gradient-b
+        );
+        opacity: 0.3;
+      }
+    }
+  }
+
+  &-info {
+    color: $color-white;
+    width: $track-disp-width-xs;
+    height: $track-disp-height-xs;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: 20%;
+    height: auto;
+  }
+
+  &-name,
+  &-artist,
+  &-album {
+    width: 100%;
+    display: block;
+    text-align: center;
+    line-height: 1em;
+    text-transform: uppercase;
+    margin-top: 9px;
+  }
+
+  &-name {
+    font-size: $font-xlarge + 20;
+    font-family: $font-family-extra-bold;
+  }
+
+  &-artist {
+    font-size: $font-medium;
+    font-family: $font-family-bold;
+  }
+
+  &-album {
+    font-size: $font-small;
+    font-family: $font-family-light;
+  }
+}

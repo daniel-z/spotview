@@ -1,20 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { ViewerComponent } from './components/viewer/viewer.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {ViewerComponent} from './components/viewer/viewer.component';
+import { TrackDisplayComponent } from './components/track-display/track-display.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ViewerComponent
+    AppComponent, ViewerComponent, TrackDisplayComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+    BrowserModule, AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

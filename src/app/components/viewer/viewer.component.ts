@@ -1,39 +1,46 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Player, PlayerEvents, PlayerConfig, PlayerState } from '../player/player';
-import { environment } from '../../../environments/environment';
-import { get } from 'lodash';
+import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import {
+  Player,
+  PlayerEvents,
+  PlayerConfig,
+  PlayerState
+} from "../player/player";
+import { environment } from "../../../environments/environment";
+import { TrackDetails } from "../track-display/track-display.component";
+import { get } from "lodash";
 
 @Component({
-  selector: 'app-viewer',
-  templateUrl: './viewer.component.html',
-  styleUrls: ['./viewer.component.scss']
+  selector: "app-viewer",
+  templateUrl: "./viewer.component.html",
+  styleUrls: ["./viewer.component.scss"]
 })
 export class ViewerComponent implements OnInit {
   private player: Player;
   private playerConfig: PlayerConfig;
   private readonly token = environment.token;
   private playerState: PlayerState;
+  trackDetails: TrackDetails;
   windowRef: any = window;
   // tslint:disable-next-line: max-line-length
-  bgImage = 'https://images.unsplash.com/photo-1556988271-ef7cb443eeb8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2857&q=80';
+  bgImage =
+    "https://images.unsplash.com/photo-1556988271-ef7cb443eeb8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2857&q=80";
 
   constructor(private changeDetector: ChangeDetectorRef) {
     this.onStateChange = this.onStateChange.bind(this);
   }
 
   ngOnInit() {
-    console.log('token', this.token);
+    console.log("token", this.token);
 
     this.playerConfig = {
       token: this.token,
-      name: 'Spot Player',
+      name: "Spot Player",
       windowRef: this.windowRef,
       onError: this.onError,
       onReady: this.onReady,
       onOffline: this.onOffline,
       onStateChange: this.onStateChange
     };
-
     this.player = new Player(this.playerConfig);
   }
 
@@ -55,8 +62,26 @@ export class ViewerComponent implements OnInit {
   }
 
   updateViewer(): void {
-    console.log('this.playerState', this.playerState);
+    console.log("this.playerState", this.playerState);
+    this.trackDetails = {
+      trackName: get(this.playerState, "track_window.current_track.name"),
+      artistName: get(
+        this.playerState,
+        "track_window.current_track.artists[0].name"
+      ),
+      album: {
+        albumImageUrl: get(
+          this.playerState,
+          "track_window.current_track.album.images[2].url"
+        ),
+        name: get(this.playerState, "track_window.current_track.album.name")
+      }
+    };
     this.changeDetector.detectChanges();
+  }
+
+  getTrackDetails(): TrackDetails {
+    return this.trackDetails;
   }
 
   getBgImageStyle(): string {
@@ -66,12 +91,6 @@ export class ViewerComponent implements OnInit {
 
   getWindowHeightPx(): string {
     return `${this.windowRef.window.innerHeight}px`;
-  }
-
-  getAlbumImageUrl(): string {
-    const images = get(this.playerState, 'track_window.current_track.album.images');
-    // return images && images[2] ? `url('${images[2].url}')` : null;
-    return 'url("https://i.scdn.co/image/58012c06f80ffec8f785d5feca212f3e4c135667")';
   }
 
   getWindowWidthtPx(): string {

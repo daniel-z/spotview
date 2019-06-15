@@ -1,0 +1,14 @@
+<div
+  class="track-display"
+  *ngIf="trackDetails"
+  [ngStyle]="{
+    'background-image': getAlbumImageUrl()
+  }"
+>
+  <div class="track-overlay"></div>
+  <ul class="track-info">
+    <li class="track-name">{{ trackDetails.trackName }}</li>
+    <li class="track-artist">{{ trackDetails.artistName }}</li>
+    <li class="track-album">{{ trackDetails.album.name }}</li>
+  </ul>
+</div>

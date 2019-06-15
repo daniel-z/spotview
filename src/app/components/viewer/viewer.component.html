@@ -1,16 +1,10 @@
-<div class="viewer-container" [ngStyle]="{
-  'width': getWindowWidthtPx(),
-  'height': getWindowHeightPx(),
-  'background-image': getBgImageStyle()
-}">
-    <div class="track-art" *ngIf="getAlbumImageUrl()" [ngStyle]="{
-        'background-image': getAlbumImageUrl()
-      }">
-        <div class="track-overlay"></div>
-        <ul class="track-info">
-            <li class="track-name">Yo También</li>
-            <li class="track-artist">Hillsong</li>
-            <li class="track-album">Wonder</li>
-        </ul>
-    </div>
+<div
+  class="viewer-container"
+  [ngStyle]="{
+    width: getWindowWidthtPx(),
+    height: getWindowHeightPx(),
+    'background-image': getBgImageStyle()
+  }"
+>
+  <app-track-display [trackDetails]="getTrackDetails()"></app-track-display>
 </div>
