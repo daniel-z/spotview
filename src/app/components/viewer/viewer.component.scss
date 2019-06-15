@@ -1,12 +1,15 @@
 @import "../../styles/variables";
+@import "../../styles/media-queries";
 
 /*  track art variables  */
-$track-art-height-sm: 100%;
-$track-art-width-sm: 100%;
+// size
+$track-art-height-xs: 100%;
+$track-art-width-xs: 100%;
 $track-art-height-md: 500px;
 $track-art-width-md: 500px;
 $track-art-height-xl: 500px;
 $track-art-width-xl: 500px;
+
 $track-overlay-gradient-a: $color-red;
 $track-overlay-gradient-b: $color-blue;
 
@@ -32,8 +35,19 @@ $track-overlay-gradient-b: $color-blue;
   .track {
     &-art {
       @include center-bg();
-      width: $track-art-height-sm;
-      height: $track-art-height-sm;
+      width: $track-art-height-xs;
+      height: $track-art-height-xs;
+
+      @include md-up {
+        width: $track-art-height-md;
+        height: $track-art-height-md;
+      }
+
+      @include xl-only {
+        width: $track-art-height-xl;
+        height: $track-art-height-xl;
+      }
+
       display: block;
       opacity: 0.1;
       transition: opacity 1s;
@@ -52,8 +66,8 @@ $track-overlay-gradient-b: $color-blue;
 
     &-info {
       color: $color-white;
-      width: $track-art-width-sm;
-      height: $track-art-height-sm;
+      width: $track-art-width-xs;
+      height: $track-art-height-xs;
       margin: 0;
       padding: 0;
       position: absolute;
