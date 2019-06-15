@@ -3,5 +3,14 @@
   'height': getWindowHeightPx(),
   'background-image': getBgImageStyle()
 }">
-    <img *ngIf="true" [src]=bgImage alt=" ">
+    <div class="track-art" *ngIf="getAlbumImageUrl()" [ngStyle]="{
+        'background-image': getAlbumImageUrl()
+      }">
+        <div class="track-overlay"></div>
+        <ul class="track-info">
+            <li class="track-name">Yo También</li>
+            <li class="track-artist">Hillsong</li>
+            <li class="track-album">Wonder</li>
+        </ul>
+    </div>
 </div>

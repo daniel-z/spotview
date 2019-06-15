@@ -15,7 +15,7 @@ export class ViewerComponent implements OnInit {
   private playerState: PlayerState;
   windowRef: any = window;
   // tslint:disable-next-line: max-line-length
-  bgImage = 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2550&q=80';
+  bgImage = 'https://images.unsplash.com/photo-1556988271-ef7cb443eeb8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2857&q=80';
 
   constructor(private changeDetector: ChangeDetectorRef) {
     this.onStateChange = this.onStateChange.bind(this);
@@ -56,8 +56,6 @@ export class ViewerComponent implements OnInit {
 
   updateViewer(): void {
     console.log('this.playerState', this.playerState);
-    const images = get(this.playerState, 'track_window.current_track.album.images');
-    this.bgImage = images && images[2] ? images[2].url : null;
     this.changeDetector.detectChanges();
   }
 
@@ -69,6 +67,13 @@ export class ViewerComponent implements OnInit {
   getWindowHeightPx(): string {
     return `${this.windowRef.window.innerHeight}px`;
   }
+
+  getAlbumImageUrl(): string {
+    const images = get(this.playerState, 'track_window.current_track.album.images');
+    // return images && images[2] ? `url('${images[2].url}')` : null;
+    return 'url("https://i.scdn.co/image/58012c06f80ffec8f785d5feca212f3e4c135667")';
+  }
+
   getWindowWidthtPx(): string {
     return `${this.windowRef.window.innerWidth}px`;
   }
