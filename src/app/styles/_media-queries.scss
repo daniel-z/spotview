@@ -1,0 +1,64 @@
+// breakpoints
+$break-xs-max: 576px;
+
+$break-sm-min: 577px;
+$break-sm-max: 767px;
+
+$break-md-min: 768px;
+$break-md-max: 991px;
+
+$break-lg-min: 992px;
+$break-lg-max: 1999px;
+
+$break-xl-min: 1200px;
+
+// media queries
+
+@mixin sm-up {
+  @media (min-width: #{$break-sm-min}) {
+    @content;
+  }
+}
+
+@mixin md-up {
+  @media (min-width: #{$break-md-min}) {
+    @content;
+  }
+}
+
+@mixin lg-up {
+  @media (min-width: #{$break-lg-min}) {
+    @content;
+  }
+}
+
+/*  Only  */
+@mixin xs-only {
+  @media (max-width: #{$break-xs-max}) {
+    @content;
+  }
+}
+
+@mixin sm-only {
+  @media (min-width: #{$break-sm-min}) and (max-width: #{$break-sm-max}) {
+    @content;
+  }
+}
+
+@mixin md-only {
+  @media (min-width: #{$break-md-min}) and (max-width: #{$break-md-max}) {
+    @content;
+  }
+}
+
+@mixin lg-only {
+  @media (min-width: #{$break-lg-min}) and (max-width: #{$break-lg-max}) {
+    @content;
+  }
+}
+
+@mixin xl-only {
+  @media (min-width: #{$break-xl-min}) {
+    @content;
+  }
+}
