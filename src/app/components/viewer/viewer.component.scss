@@ -1,13 +1,4 @@
-/*  global variables  */
-$font-xlarge: 40px;
-$font-large: 30px;
-$font-medium: 26px;
-$font-small: 14px;
-$font-xsmall: 10px;
-$color-white: #fff;
-$font-family-extra-bold: Teko, sans-serif;
-$font-family-bold: Montserrat, sans-serif;
-$font-family-light: Josefin Sans, sans-serif;
+@import "../../styles/variables";
 
 /*  track art variables  */
 $track-art-height-sm: 100%;
@@ -16,8 +7,8 @@ $track-art-height-md: 500px;
 $track-art-width-md: 500px;
 $track-art-height-xl: 500px;
 $track-art-width-xl: 500px;
-$track-overlay-gradient-a: #00f;
-$track-overlay-gradient-b: #f00;
+$track-overlay-gradient-a: $color-red;
+$track-overlay-gradient-b: $color-blue;
 
 /*  track mixins  */
 @mixin center-children {
