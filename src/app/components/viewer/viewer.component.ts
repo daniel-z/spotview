@@ -17,7 +17,7 @@ import { get } from "lodash";
 export class ViewerComponent implements OnInit {
   private player: Player;
   private playerConfig: PlayerConfig;
-  private readonly token = environment.token;
+  private readonly token = environment.spotify.auth.token;
   private playerState: PlayerState;
   trackDetails: TrackDetails;
   windowRef: any = window;
