@@ -5,6 +5,7 @@
     height: getWindowHeightPx(),
     'background-image': getBgImageStyle()
   }"
+  (window:resize)="onResize($event)"
 >
-  <app-track-display [trackDetails]="getTrackDetails()"></app-track-display>
+  <app-track-display [trackDetails]="trackDetails"></app-track-display>
 </div>

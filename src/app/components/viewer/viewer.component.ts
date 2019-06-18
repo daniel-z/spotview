@@ -1,18 +1,18 @@
-import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import {
   Player,
   PlayerEvents,
   PlayerConfig,
   PlayerState
-} from "../player/player";
-import { environment } from "../../../environments/environment";
-import { TrackDetails } from "../track-display/track-display.component";
-import { get } from "lodash";
+} from '../player/player';
+import { environment } from '../../../environments/environment';
+import { TrackDetails } from '../track-display/track-display.component';
+import { get } from 'lodash';
 
 @Component({
-  selector: "app-viewer",
-  templateUrl: "./viewer.component.html",
-  styleUrls: ["./viewer.component.scss"]
+  selector: 'app-viewer',
+  templateUrl: './viewer.component.html',
+  styleUrls: ['./viewer.component.scss']
 })
 export class ViewerComponent implements OnInit {
   private player: Player;
@@ -21,20 +21,21 @@ export class ViewerComponent implements OnInit {
   private playerState: PlayerState;
   trackDetails: TrackDetails;
   windowRef: any = window;
+
   // tslint:disable-next-line: max-line-length
   bgImage =
-    "https://images.unsplash.com/photo-1556988271-ef7cb443eeb8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2857&q=80";
+    'https://images.unsplash.com/photo-1556988271-ef7cb443eeb8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2857&q=80';
 
   constructor(private changeDetector: ChangeDetectorRef) {
     this.onStateChange = this.onStateChange.bind(this);
   }
 
   ngOnInit() {
-    console.log("token", this.token);
+    console.log('token', this.token);
 
     this.playerConfig = {
       token: this.token,
-      name: "Spot Player",
+      name: 'Spot Player',
       windowRef: this.windowRef,
       onError: this.onError,
       onReady: this.onReady,
@@ -62,26 +63,29 @@ export class ViewerComponent implements OnInit {
   }
 
   updateViewer(): void {
-    console.log("this.playerState", this.playerState);
+    console.log('this.playerState', this.playerState);
+    if (!this.playerState) {
+      return;
+    }
+    this.getTrackDetails();
+    this.changeDetector.detectChanges();
+  }
+
+  getTrackDetails(): void {
     this.trackDetails = {
-      trackName: get(this.playerState, "track_window.current_track.name"),
+      trackName: get(this.playerState, 'track_window.current_track.name'),
       artistName: get(
         this.playerState,
-        "track_window.current_track.artists[0].name"
+        'track_window.current_track.artists[0].name'
       ),
       album: {
         albumImageUrl: get(
           this.playerState,
-          "track_window.current_track.album.images[2].url"
+          'track_window.current_track.album.images[2].url'
         ),
-        name: get(this.playerState, "track_window.current_track.album.name")
+        name: get(this.playerState, 'track_window.current_track.album.name')
       }
     };
-    this.changeDetector.detectChanges();
-  }
-
-  getTrackDetails(): TrackDetails {
-    return this.trackDetails;
   }
 
   getBgImageStyle(): string {
@@ -95,5 +99,9 @@ export class ViewerComponent implements OnInit {
 
   getWindowWidthtPx(): string {
     return `${this.windowRef.window.innerWidth}px`;
+  }
+
+  onResize(): void {
+    this.updateViewer();
   }
 }

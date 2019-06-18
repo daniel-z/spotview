@@ -6,5 +6,8 @@
   display: block;
   filter: blur(1);
   @include center-bg();
-  @include center-children();
+
+  @include md-up {
+    @include center-children();
+  }
 }

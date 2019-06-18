@@ -7,9 +7,9 @@ export const environment = {
   spotify: {
     auth: {
       token:
-        "BQC74KtWL6TETGAWQV6gdcQ6SMLxiuvOn3bh3F00lFAhdZEZDIgpiin01mcz1PxX_O3iUmpg0aUIfMVdFYHpKeRqDt-utFkZyJVRTuP--PzV5Z8EC5k68b2MTbV0ZP17P5G4PQ3xjKsN3tTjg9ag4uguqV8YPtB_1SO0Rw",
-      clientId: "09b24f2eda9e45d3a815f95d88a129e1",
-      clientSecret: "44d8a4367a164d14b53fa1fda4cce8a4"
+        'BQALksix1kggouRgkX_Eytecd6L20BPo09Xzcbmkmac2hVfrBTT9JOaglCkW115xv4Pug1sbOqnPMRMh7IWv8D3SBZkViIIJirJRj4h6e8YPv0CZMnXh_uJxKfuuzJ2laayG2LL_VFc_HOdPZP45HZsgJnYdJUUiuBMHJQ',
+      clientId: '09b24f2eda9e45d3a815f95d88a129e1',
+      clientSecret: '44d8a4367a164d14b53fa1fda4cce8a4'
     }
   }
 };
@@ -21,4 +21,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+import 'zone.js/dist/zone-error'; // Included with Angular CLI.
