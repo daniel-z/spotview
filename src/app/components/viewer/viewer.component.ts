@@ -3,7 +3,8 @@ import {
   Player,
   PlayerEvents,
   PlayerConfig,
-  PlayerState
+  PlayerState,
+  playerStateDefaults
 } from '../player/player';
 import { environment } from '../../../environments/environment';
 import { TrackDetails } from '../track-display/track-display.component';
@@ -18,16 +19,16 @@ export class ViewerComponent implements OnInit {
   private player: Player;
   private playerConfig: PlayerConfig;
   private readonly token = environment.spotify.auth.token;
-  private playerState: PlayerState;
+  playerState: PlayerState = playerStateDefaults;
   trackDetails: TrackDetails;
   windowRef: any = window;
 
-  // tslint:disable-next-line: max-line-length
   bgImage =
     'https://images.unsplash.com/photo-1556988271-ef7cb443eeb8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2857&q=80';
 
   constructor(private changeDetector: ChangeDetectorRef) {
     this.onStateChange = this.onStateChange.bind(this);
+    this.onTogglePlay = this.onTogglePlay.bind(this);
   }
 
   ngOnInit() {
@@ -43,6 +44,8 @@ export class ViewerComponent implements OnInit {
       onStateChange: this.onStateChange
     };
     this.player = new Player(this.playerConfig);
+    this.playerState = playerStateDefaults;
+    this.getTrackDetails();
   }
 
   onError(type: string, data: object) {
@@ -58,15 +61,12 @@ export class ViewerComponent implements OnInit {
   }
 
   onStateChange(type: string, playerState: PlayerState) {
-    this.playerState = playerState;
+    this.playerState = playerState || playerStateDefaults;
+    console.log('this.playerState', this.playerState);
     this.updateViewer();
   }
 
   updateViewer(): void {
-    console.log('this.playerState', this.playerState);
-    if (!this.playerState) {
-      return;
-    }
     this.getTrackDetails();
     this.changeDetector.detectChanges();
   }
@@ -89,7 +89,6 @@ export class ViewerComponent implements OnInit {
   }
 
   getBgImageStyle(): string {
-    console.log(this.bgImage);
     return `url('${this.bgImage}')`;
   }
 
@@ -106,6 +105,10 @@ export class ViewerComponent implements OnInit {
   }
 
   onTogglePlay(): void {
+    if (!this.player) {
+      return;
+    }
+
     this.player.togglePlay().then(() => {
       console.log('Toggled playback!');
     });

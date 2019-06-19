@@ -7,5 +7,9 @@
   }"
   (window:resize)="onResize($event)"
 >
-  <app-track-display [trackDetails]="trackDetails"></app-track-display>
+  <app-track-display
+    [trackDetails]="trackDetails"
+    [isPaused]="playerState.paused"
+    [onTogglePlay]="onTogglePlay"
+  ></app-track-display>
 </div>

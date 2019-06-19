@@ -2,8 +2,11 @@
   <button class="backward">
     <i class="fas fa-step-backward"></i>
   </button>
-  <button class="toggle-play">
+  <button *ngIf="isPaused" class="toggle-play" (click)="onTogglePlay()">
     <i class="fas fa-play"></i>
+  </button>
+  <button *ngIf="!isPaused" class="toggle-play" (click)="onTogglePlay()">
+    <i class="fas fa-stop"></i>
   </button>
   <button>
     <i class="fas fa-step-forward"></i>

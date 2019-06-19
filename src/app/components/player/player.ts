@@ -9,14 +9,57 @@ export interface PlayerConfig {
 }
 
 export interface PlayerState {
-  track_window?: {
-    current_track?: {
-      album?: {
-        images?: string[];
+  duration: number;
+  paused: boolean;
+  position: number;
+  repeat_mode: number;
+  shuffle: boolean;
+  timestamp: number;
+  track_window: {
+    current_track: {
+      name: string;
+      album: {
+        name: string;
+        images: [
+          {
+            url?: string;
+          }
+        ];
       };
+      artists: [
+        {
+          name?: string;
+        }
+      ];
     };
   };
 }
+
+const defaultAlbumArtImage =
+  'https://images.unsplash.com/photo-1526121548504-55f319b740ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80';
+
+export const playerStateDefaults: PlayerState = {
+  duration: 0,
+  paused: true,
+  position: 0,
+  repeat_mode: 0,
+  shuffle: false,
+  timestamp: 0,
+  track_window: {
+    current_track: {
+      name: '-No Name-',
+      album: {
+        name: '-No Album-',
+        images: [{}, {}, { url: defaultAlbumArtImage }]
+      },
+      artists: [
+        {
+          name: '-No Artist-'
+        }
+      ]
+    }
+  }
+};
 
 export enum PlayerEvents {
   'INITIALIZATION_ERROR' = 'initialization_error',
@@ -72,10 +115,8 @@ export class Player {
   }
 
   // player basic operations
-  public togglePlay(): void {
-    this.player.togglePlay().then(() => {
-      this.logMessage({ message: 'Toggled playback!' });
-    });
+  public togglePlay(): Promise<PromiseConstructor> {
+    return this.player.togglePlay();
   }
 
   private logMessage({ message }): void {
