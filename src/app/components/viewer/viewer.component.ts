@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import * as PlayerModel from '../player/player.model';
 import { Player } from '../player/player';
 import { environment } from '../../../environments/environment';
-import { TrackDetails } from '../track-display/track-display.component';
+import { TrackDetailsInterface } from '../track-display/track-display.model';
 import { get } from 'lodash';
 
 @Component({
@@ -13,11 +13,11 @@ import { get } from 'lodash';
 })
 export class ViewerComponent implements OnInit {
   private player: Player;
-  private playerConfig: PlayerModel.PlayerConfig;
   private token = environment.spotify.auth.token;
   playerState: PlayerModel.PlayerState = PlayerModel.InitialPlayerState;
-  trackDetails: TrackDetails;
+  trackDetails: TrackDetailsInterface;
   windowRef: any = window;
+  playerName = 'SpotyPlayer';
 
   bgImage =
     'https://images.unsplash.com/photo-1556988271-ef7cb443eeb8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2857&q=80';
@@ -32,18 +32,20 @@ export class ViewerComponent implements OnInit {
 
   ngOnInit() {
     this.token = this.route.snapshot.queryParams.token || this.token;
-    this.playerConfig = {
+    this.createPlayer();
+    this.getTrackDetails();
+  }
+
+  createPlayer() {
+    this.player = new Player({
       token: this.token,
-      name: 'Spot Player',
+      name: this.playerName,
       windowRef: this.windowRef,
       onError: this.onError,
       onReady: this.onReady,
       onOffline: this.onOffline,
       onStateChange: this.onStateChange
-    };
-    this.player = new Player(this.playerConfig);
-    this.playerState = PlayerModel.InitialPlayerState;
-    this.getTrackDetails();
+    });
   }
 
   onError(type: string, data: object) {
