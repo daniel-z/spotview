@@ -8,9 +8,12 @@
   >
     <div class="track-overlay"></div>
   </div>
-  <ul class="track-info">
-    <li class="track-name">{{ trackDetails.trackName }}</li>
-    <li class="track-artist">{{ trackDetails.artistName }}</li>
-    <li class="track-album">{{ trackDetails.album.name }}</li>
-  </ul>
+  <div class="extras-container">
+    <ul class="track-info">
+      <li class="track-name">{{ trackDetails.trackName }}</li>
+      <li class="track-artist">{{ trackDetails.artistName }}</li>
+      <li class="track-album">{{ trackDetails.album.name }}</li>
+    </ul>
+    <app-track-controls></app-track-controls>
+  </div>
 </div>

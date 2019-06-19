@@ -104,4 +104,10 @@ export class ViewerComponent implements OnInit {
   onResize(): void {
     this.updateViewer();
   }
+
+  onTogglePlay(): void {
+    this.player.togglePlay().then(() => {
+      console.log('Toggled playback!');
+    });
+  }
 }

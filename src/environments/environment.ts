@@ -7,7 +7,7 @@ export const environment = {
   spotify: {
     auth: {
       token:
-        'BQALksix1kggouRgkX_Eytecd6L20BPo09Xzcbmkmac2hVfrBTT9JOaglCkW115xv4Pug1sbOqnPMRMh7IWv8D3SBZkViIIJirJRj4h6e8YPv0CZMnXh_uJxKfuuzJ2laayG2LL_VFc_HOdPZP45HZsgJnYdJUUiuBMHJQ',
+        'BQBb9OSKNBIKSvZ698PcRK95WXLUK7GIXKlikimAsQiKt9ORZNXykNNnjBw2v9x-Z8PaT5NL4saTskW1omdHWO2NDgyDMrpX-63X_abhYrokDvqv7O9_QBgx1UdxWknMgoeHyB1e6mPBlZpfNMWUp8mkCtb86adljGytDg',
       clientId: '09b24f2eda9e45d3a815f95d88a129e1',
       clientSecret: '44d8a4367a164d14b53fa1fda4cce8a4'
     }

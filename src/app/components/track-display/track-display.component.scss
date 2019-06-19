@@ -1,6 +1,6 @@
-@import "../../styles/variables";
-@import "../../styles/media-queries";
-@import "../../styles/utils";
+@import '../../styles/variables';
+@import '../../styles/media-queries';
+@import '../../styles/utils';
 
 /*  track art variables  */
 // size
@@ -84,12 +84,6 @@ $track-overlay-gradient-b: $color-blue;
     margin: 0;
     padding: 0;
     height: auto;
-    position: absolute;
-    bottom: 100px;
-
-    @include md-up {
-      bottom: 10px;
-    }
   }
 
   &-name,
@@ -117,5 +111,17 @@ $track-overlay-gradient-b: $color-blue;
   &-album {
     font-size: $font-small;
     font-family: $font-family-light;
+  }
+}
+
+.extras-container {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 80px;
+  text-shadow: 0 0 8px $color-gray-c;
+
+  @include md-up {
+    margin-bottom: 10px;
   }
 }

@@ -1,0 +1,33 @@
+@import '../../styles/variables';
+@import '../../styles/media-queries';
+@import '../../styles/utils';
+
+$button-margin: 20px;
+$button-size: 30px;
+$button-color: $color-gray-a;
+$button-margin-between: 30px;
+$button-border-color: $button-color;
+$button-border-size: 0;
+$button-border-radius: 15%;
+$button-padding: 5px 10px;
+$button-text-shadow: 0 0 5px $color-gray-c;
+
+.track-controlls {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  margin-top: $button-margin;
+  @include center-children();
+
+  button {
+    font-size: $button-size;
+    color: $button-color;
+    margin: 0 $button-margin-between/2;
+    border: $button-border-size solid $button-border-color;
+    border-radius: $button-border-radius;
+    padding: $button-padding;
+    background-color: $color-transparent;
+    text-shadow: $button-text-shadow;
+  }
+}
