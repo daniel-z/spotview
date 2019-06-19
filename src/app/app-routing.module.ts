@@ -1,6 +1,6 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { APP_ROUTES } from "./app.routes";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { APP_ROUTES } from './app.routes';
 
 const routes: Routes = [];
 
