@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { get } from 'lodash';
-import { PlayerState } from '../player/player';
+import { PlayerState } from '../player/player.model';
 
 export interface TrackDetails {
   trackName?: string;

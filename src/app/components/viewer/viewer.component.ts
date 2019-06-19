@@ -1,12 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  Player,
-  PlayerEvents,
-  PlayerConfig,
-  PlayerState,
-  playerStateDefaults
-} from '../player/player';
+import * as PlayerModel from '../player/player.model';
+import { Player } from '../player/player';
 import { environment } from '../../../environments/environment';
 import { TrackDetails } from '../track-display/track-display.component';
 import { get } from 'lodash';
@@ -18,9 +13,9 @@ import { get } from 'lodash';
 })
 export class ViewerComponent implements OnInit {
   private player: Player;
-  private playerConfig: PlayerConfig;
+  private playerConfig: PlayerModel.PlayerConfig;
   private token = environment.spotify.auth.token;
-  playerState: PlayerState = playerStateDefaults;
+  playerState: PlayerModel.PlayerState = PlayerModel.InitialPlayerState;
   trackDetails: TrackDetails;
   windowRef: any = window;
 
@@ -47,7 +42,7 @@ export class ViewerComponent implements OnInit {
       onStateChange: this.onStateChange
     };
     this.player = new Player(this.playerConfig);
-    this.playerState = playerStateDefaults;
+    this.playerState = PlayerModel.InitialPlayerState;
     this.getTrackDetails();
   }
 
@@ -63,8 +58,8 @@ export class ViewerComponent implements OnInit {
     console.log(type, data);
   }
 
-  onStateChange(type: string, playerState: PlayerState) {
-    this.playerState = playerState || playerStateDefaults;
+  onStateChange(type: string, playerState: PlayerModel.PlayerState) {
+    this.playerState = playerState || PlayerModel.InitialPlayerState;
     console.log('this.playerState', this.playerState);
     this.updateViewer();
   }
