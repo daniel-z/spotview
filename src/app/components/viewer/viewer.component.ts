@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {
   Player,
   PlayerEvents,
@@ -18,7 +19,7 @@ import { get } from 'lodash';
 export class ViewerComponent implements OnInit {
   private player: Player;
   private playerConfig: PlayerConfig;
-  private readonly token = environment.spotify.auth.token;
+  private token = environment.spotify.auth.token;
   playerState: PlayerState = playerStateDefaults;
   trackDetails: TrackDetails;
   windowRef: any = window;
@@ -26,14 +27,16 @@ export class ViewerComponent implements OnInit {
   bgImage =
     'https://images.unsplash.com/photo-1556988271-ef7cb443eeb8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2857&q=80';
 
-  constructor(private changeDetector: ChangeDetectorRef) {
+  constructor(
+    private changeDetector: ChangeDetectorRef,
+    private route: ActivatedRoute
+  ) {
     this.onStateChange = this.onStateChange.bind(this);
     this.onTogglePlay = this.onTogglePlay.bind(this);
   }
 
   ngOnInit() {
-    console.log('token', this.token);
-
+    this.token = this.route.snapshot.queryParams.token || this.token;
     this.playerConfig = {
       token: this.token,
       name: 'Spot Player',
@@ -109,8 +112,6 @@ export class ViewerComponent implements OnInit {
       return;
     }
 
-    this.player.togglePlay().then(() => {
-      console.log('Toggled playback!');
-    });
+    this.player.togglePlay();
   }
 }

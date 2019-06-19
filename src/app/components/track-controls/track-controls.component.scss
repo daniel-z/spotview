@@ -2,7 +2,7 @@
 @import '../../styles/media-queries';
 @import '../../styles/utils';
 
-$button-margin: 20px;
+$button-margin-top: 5px;
 $button-size: 30px;
 $button-color: $color-gray-a;
 $button-margin-between: 30px;
@@ -17,7 +17,7 @@ $button-text-shadow: 0 0 5px $color-gray-c;
   margin: 0;
   padding: 0;
 
-  margin-top: $button-margin;
+  margin-top: $button-margin-top;
   @include center-children();
 
   button {
