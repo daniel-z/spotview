@@ -14,6 +14,9 @@ $track-disp-width-xl: 500px;
 $track-overlay-gradient-a: $color-red;
 $track-overlay-gradient-b: $color-blue;
 
+$track-name-fsize: $font-medium;
+$track-albumname-fsize: $font-small;
+
 @mixin track-sizes {
   width: $track-disp-height-xs;
   height: $track-disp-height-xs;
@@ -76,42 +79,6 @@ $track-overlay-gradient-b: $color-blue;
     top: 0;
     left: 0;
   }
-
-  &-info {
-    color: $color-white;
-    width: $track-disp-width-xs;
-    height: $track-disp-height-xs;
-    margin: 0;
-    padding: 0;
-    height: auto;
-  }
-
-  &-name,
-  &-artist,
-  &-album {
-    width: 100%;
-    display: block;
-    text-align: center;
-    line-height: 1em;
-    text-transform: uppercase;
-    margin-top: 9px;
-    text-shadow: 0px 0px 40px #000;
-  }
-
-  &-name {
-    font-size: $font-xlarge + 20;
-    font-family: $font-family-extra-bold;
-  }
-
-  &-artist {
-    font-size: $font-medium;
-    font-family: $font-family-bold;
-  }
-
-  &-album {
-    font-size: $font-small;
-    font-family: $font-family-light;
-  }
 }
 
 .extras-container {
@@ -123,5 +90,39 @@ $track-overlay-gradient-b: $color-blue;
 
   @include md-up {
     margin-bottom: 10px;
+    position: relative;
+  }
+
+  .track {
+    &-info {
+      color: $color-white;
+      width: $track-disp-width-xs;
+      height: $track-disp-height-xs;
+      margin: 0;
+      padding: 0;
+      height: auto;
+    }
+
+    &-name,
+    &-album {
+      text-align: center;
+      width: 100%;
+      display: block;
+      text-align: center;
+      line-height: 1em;
+      text-transform: uppercase;
+      margin-top: 9px;
+      text-shadow: 0px 0px 40px #000;
+    }
+
+    &-name {
+      font-size: $track-name-fsize;
+      font-family: $font-family-extra-bold;
+    }
+
+    &-album {
+      font-size: $track-albumname-fsize;
+      font-family: $font-family-light;
+    }
   }
 }
