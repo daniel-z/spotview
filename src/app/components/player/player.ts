@@ -8,6 +8,9 @@ export interface PlayerConfig {
   onStateChange: (type: string, playerState: PlayerState) => void;
 }
 
+interface Image {
+  url?: string;
+}
 export interface PlayerState {
   duration: number;
   paused: boolean;
@@ -20,11 +23,7 @@ export interface PlayerState {
       name: string;
       album: {
         name: string;
-        images: [
-          {
-            url?: string;
-          }
-        ];
+        images: Image[];
       };
       artists: [
         {
@@ -47,14 +46,14 @@ export const playerStateDefaults: PlayerState = {
   timestamp: 0,
   track_window: {
     current_track: {
-      name: '-No Name-',
+      name: 'No Name',
       album: {
-        name: '-No Album-',
+        name: 'No Album',
         images: [{}, {}, { url: defaultAlbumArtImage }]
       },
       artists: [
         {
-          name: '-No Artist-'
+          name: 'No Artist'
         }
       ]
     }
