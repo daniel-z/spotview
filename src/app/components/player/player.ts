@@ -1,4 +1,8 @@
-import * as PlayerModel from './player.model';
+import {
+  PlayerConfigInterface,
+  PlayerEvents,
+  PlayerStateInterface
+} from './player.model';
 
 export class Player {
   private token: string;
@@ -6,12 +10,12 @@ export class Player {
   private windowRef: any;
   private player: any;
 
-  private onError: PlayerModel.PlayerConfig['onError'];
-  private onReady: PlayerModel.PlayerConfig['onReady'];
-  private onOffline: PlayerModel.PlayerConfig['onOffline'];
-  private onStateChange: PlayerModel.PlayerConfig['onStateChange'];
+  private onError: PlayerConfigInterface['onError'];
+  private onReady: PlayerConfigInterface['onReady'];
+  private onOffline: PlayerConfigInterface['onOffline'];
+  private onStateChange: PlayerConfigInterface['onStateChange'];
 
-  constructor(config: PlayerModel.PlayerConfig) {
+  constructor(config: PlayerConfigInterface) {
     this.token = config.token;
     this.windowRef = config.windowRef;
     this.waitForSpotifyToStart();
@@ -57,43 +61,34 @@ export class Player {
   }
 
   private initEvents() {
-    this.player.addListener(
-      PlayerModel.PlayerEvents.INITIALIZATION_ERROR,
-      (data: object) =>
-        this.onError(PlayerModel.PlayerEvents.INITIALIZATION_ERROR, data)
+    this.player.addListener(PlayerEvents.INITIALIZATION_ERROR, (data: object) =>
+      this.onError(PlayerEvents.INITIALIZATION_ERROR, data)
+    );
+
+    this.player.addListener(PlayerEvents.AUTHENTICATION_ERROR, (data: object) =>
+      this.onError(PlayerEvents.AUTHENTICATION_ERROR, data)
+    );
+
+    this.player.addListener(PlayerEvents.ACCOUNT_ERROR, (data: object) =>
+      this.onError(PlayerEvents.ACCOUNT_ERROR, data)
+    );
+
+    this.player.addListener(PlayerEvents.PLAYBACK_ERROR, (data: object) =>
+      this.onError(PlayerEvents.PLAYBACK_ERROR, data)
+    );
+
+    this.player.addListener(PlayerEvents.READY, (data: object) =>
+      this.onReady(PlayerEvents.READY, data)
+    );
+
+    this.player.addListener(PlayerEvents.NOT_READY, (data: object) =>
+      this.onOffline(PlayerEvents.NOT_READY, data)
     );
 
     this.player.addListener(
-      PlayerModel.PlayerEvents.AUTHENTICATION_ERROR,
-      (data: object) =>
-        this.onError(PlayerModel.PlayerEvents.AUTHENTICATION_ERROR, data)
-    );
-
-    this.player.addListener(
-      PlayerModel.PlayerEvents.ACCOUNT_ERROR,
-      (data: object) =>
-        this.onError(PlayerModel.PlayerEvents.ACCOUNT_ERROR, data)
-    );
-
-    this.player.addListener(
-      PlayerModel.PlayerEvents.PLAYBACK_ERROR,
-      (data: object) =>
-        this.onError(PlayerModel.PlayerEvents.PLAYBACK_ERROR, data)
-    );
-
-    this.player.addListener(PlayerModel.PlayerEvents.READY, (data: object) =>
-      this.onReady(PlayerModel.PlayerEvents.READY, data)
-    );
-
-    this.player.addListener(
-      PlayerModel.PlayerEvents.NOT_READY,
-      (data: object) => this.onOffline(PlayerModel.PlayerEvents.NOT_READY, data)
-    );
-
-    this.player.addListener(
-      PlayerModel.PlayerEvents.PLAYER_STATE_CHANGED,
-      (data: PlayerModel.PlayerState) =>
-        this.onStateChange(PlayerModel.PlayerEvents.PLAYER_STATE_CHANGED, data)
+      PlayerEvents.PLAYER_STATE_CHANGED,
+      (data: PlayerStateInterface) =>
+        this.onStateChange(PlayerEvents.PLAYER_STATE_CHANGED, data)
     );
   }
 }

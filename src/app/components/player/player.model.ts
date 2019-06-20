@@ -1,18 +1,18 @@
-export interface PlayerConfig {
+export interface PlayerConfigInterface {
   token: string;
   windowRef: any;
   name?: string;
   onError: (type: string, data: object) => void;
   onReady: (type: string, data: object) => void;
   onOffline: (type: string, data: object) => void;
-  onStateChange: (type: string, playerState: PlayerState) => void;
+  onStateChange: (type: string, playerState: PlayerStateInterface) => void;
 }
 
 interface Image {
   url?: string;
 }
 
-export interface PlayerState {
+export interface PlayerStateInterface {
   duration: number;
   paused: boolean;
   position: number;
@@ -48,7 +48,7 @@ export enum PlayerEvents {
 const defaultAlbumArtImage =
   'https://images.unsplash.com/photo-1526121548504-55f319b740ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80';
 
-export const InitialPlayerState: PlayerState = {
+export const InitialPlayerState: PlayerStateInterface = {
   duration: 0,
   paused: true,
   position: 0,

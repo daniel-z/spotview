@@ -1,10 +1,11 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { get } from 'lodash';
+
 import * as PlayerModel from '../player/player.model';
 import { Player } from '../player/player';
 import { environment } from '../../../environments/environment';
 import { TrackDetailsInterface } from '../track-display/track-display.model';
-import { get } from 'lodash';
 
 @Component({
   selector: 'app-viewer',
@@ -12,9 +13,10 @@ import { get } from 'lodash';
   styleUrls: ['./viewer.component.scss']
 })
 export class ViewerComponent implements OnInit {
-  private player: Player;
   private token = environment.spotify.auth.token;
-  playerState: PlayerModel.PlayerState = PlayerModel.InitialPlayerState;
+  private player: Player;
+  playerState: PlayerModel.PlayerStateInterface =
+    PlayerModel.InitialPlayerState;
   trackDetails: TrackDetailsInterface;
   windowRef: any = window;
   playerName = 'SpotyPlayer';
@@ -60,7 +62,7 @@ export class ViewerComponent implements OnInit {
     console.log(type, data);
   }
 
-  onStateChange(type: string, playerState: PlayerModel.PlayerState) {
+  onStateChange(type: string, playerState: PlayerModel.PlayerStateInterface) {
     this.playerState = playerState || PlayerModel.InitialPlayerState;
     console.log('this.playerState', this.playerState);
     this.updateViewer();
