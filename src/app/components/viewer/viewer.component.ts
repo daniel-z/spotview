@@ -7,6 +7,8 @@ import { Player } from '../player/player';
 import { environment } from '../../../environments/environment';
 import { TrackDetailsInterface } from '../track-display/track-display.model';
 
+import { SpotifyPlayerService } from '../../services/spotify-player.service';
+
 @Component({
   selector: 'app-viewer',
   templateUrl: './viewer.component.html',
@@ -26,7 +28,8 @@ export class ViewerComponent implements OnInit {
 
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private spotifyPlayerService: SpotifyPlayerService
   ) {
     this.onStateChange = this.onStateChange.bind(this);
     this.onTogglePlay = this.onTogglePlay.bind(this);
@@ -39,33 +42,18 @@ export class ViewerComponent implements OnInit {
   }
 
   createPlayer() {
-    this.player = new Player({
+    this.player = this.spotifyPlayerService.initializePlayer({
       token: this.token,
       name: this.playerName,
       windowRef: this.windowRef,
-      onError: this.onError,
-      onReady: this.onReady,
-      onOffline: this.onOffline,
       onStateChange: this.onStateChange
     });
   }
 
-  onError(type: string, data: object) {
-    console.error(type, data);
-  }
-
-  onReady(type: string, data: object) {
-    console.log(type, data);
-  }
-
-  onOffline(type: string, data: object) {
-    console.log(type, data);
-  }
-
   onStateChange(type: string, playerState: PlayerModel.PlayerStateInterface) {
-    this.playerState = playerState || PlayerModel.InitialPlayerState;
-    console.log('this.playerState', this.playerState);
-    this.updateViewer();
+    // this.playerState = playerState || PlayerModel.InitialPlayerState;
+    // console.log(this.playerState);
+    // this.updateViewer();
   }
 
   updateViewer(): void {

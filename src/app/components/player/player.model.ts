@@ -2,10 +2,10 @@ export interface PlayerConfigInterface {
   token: string;
   windowRef: any;
   name?: string;
-  onError: (type: string, data: object) => void;
-  onReady: (type: string, data: object) => void;
-  onOffline: (type: string, data: object) => void;
-  onStateChange: (type: string, playerState: PlayerStateInterface) => void;
+  onError?: (type: string, data: object) => void;
+  onReady?: (type: string, data: object) => void;
+  onOffline?: (type: string, data: object) => void;
+  onStateChange?: (type: string, playerState: PlayerStateInterface) => void;
 }
 
 interface Image {

@@ -6,7 +6,7 @@ import {
 
 export class Player {
   private token: string;
-  private spotify: any;
+  private spotifyLib: any;
   private windowRef: any;
   private player: any;
 
@@ -34,7 +34,7 @@ export class Player {
   }
 
   private initPlayer() {
-    this.spotify = this.windowRef.Spotify;
+    this.spotifyLib = this.windowRef.Spotify;
     this.player = new this.windowRef.Spotify.Player({
       name: 'SPOTVIEW',
       getOAuthToken: (cb: (token: string) => void) => {
