@@ -41,35 +41,21 @@ export class SpotifyPlayerService {
 
   onError(type: string, data: object) {
     console.error(type, data);
-    // this.playerConfig.onError(type, data);
   }
 
   onReady(type: string, data: object) {
     // type: ready
     // data: {device_id: "5847bcbd5dcd9470099bada93fa8e7b932abab8a"}
     console.log(type, data);
-    // this.playerConfig.onReady(type, data);
   }
 
   onOffline(type: string, data: object) {
     console.log(type, data);
-    // this.playerConfig.onOffline(type, data);
   }
 
   onStateChange(type: string, playerState: PlayerModel.PlayerStateInterface) {
     // type: player_state_changed
     this.store.dispatch(PlayerStateChangeAction(playerState));
-
-    // this.playerState = playerState || PlayerModel.InitialPlayerState;
     console.log(type, this.playerState);
-    // this.playerConfig.onStateChange(type, playerState);
   }
 }
-
-// public createFood(foodName: string) {
-//   this.store.dispatch(new CreateFood({id: 0, name: foodName, description: 'aaa', amount: 5}));
-// }
-
-// public removeFood(food: Food) {
-//   this.store.dispatch(new RemoveFood(food.id));
-// }

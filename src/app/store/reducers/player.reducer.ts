@@ -5,7 +5,5 @@ import { InitialPlayerState } from '../states/player.state';
 
 export const PlayerReducer = createReducer(
   InitialPlayerState,
-  on(PlayerStateChangeAction, state => ({
-    ...state
-  }))
+  on(PlayerStateChangeAction, state => ({ ...state }))
 );
