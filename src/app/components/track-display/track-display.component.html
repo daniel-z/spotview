@@ -1,7 +1,7 @@
 <div class="track-wrapper">
   <div
     class="track-display"
-    *ngIf="trackDetails"
+    *ngIf="trackDisplayData"
     [ngStyle]="{
       'background-image': getAlbumImageUrl()
     }"
@@ -11,9 +11,9 @@
   <div class="extras-container">
     <div class="track-info">
       <span class="track-name">
-        {{ trackDetails.trackName }} ({{ trackDetails.artistName }})
+        {{ trackDisplayData.trackName }} ({{ trackDisplayData.artistName }})
       </span>
-      <span class="track-album">{{ trackDetails.album.name }}</span>
+      <span class="track-album">{{ trackDisplayData.album.name }}</span>
     </div>
     <app-track-controls
       [isPaused]="isPaused"

@@ -1,12 +1,13 @@
-import { Action, createAction, props } from '@ngrx/store';
-
+import { Action } from '@ngrx/store';
 import { PlayerStateInterface } from '../../components/player/player.model';
 
-export enum PlayerActionType {
+export enum PlayerActions {
   PLAYER_STATE_CHANGE = 'PLAYER_STATE_CHANGE'
 }
 
-export const PlayerStateChangeAction = createAction(
-  PlayerActionType.PLAYER_STATE_CHANGE,
-  props<PlayerStateInterface>()
-);
+export class PlayerStateChangeAction implements Action {
+  readonly type: string = PlayerActions.PLAYER_STATE_CHANGE;
+  constructor(public payload: PlayerStateInterface) {}
+}
+
+export type PlayerActionType = PlayerStateChangeAction;

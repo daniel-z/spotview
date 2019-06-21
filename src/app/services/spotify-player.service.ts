@@ -14,7 +14,7 @@ import { PlayerStateChangeAction } from '../store/actions/player.actions';
 export class SpotifyPlayerService {
   private player: Player;
   private playerConfig: PlayerModel.PlayerConfigInterface;
-  private playerData$: Observable<PlayerModel.PlayerStateInterface>;
+  playerData$: Observable<PlayerModel.PlayerStateInterface>;
 
   playerState: PlayerModel.PlayerStateInterface =
     PlayerModel.InitialPlayerState;
@@ -55,7 +55,7 @@ export class SpotifyPlayerService {
 
   onStateChange(type: string, playerState: PlayerModel.PlayerStateInterface) {
     // type: player_state_changed
-    this.store.dispatch(PlayerStateChangeAction(playerState));
-    console.log(type, this.playerState);
+    console.log('service', type, playerState);
+    this.store.dispatch(new PlayerStateChangeAction(playerState));
   }
 }

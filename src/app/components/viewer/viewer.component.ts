@@ -1,13 +1,19 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { get } from 'lodash';
+import { Store, select } from '@ngrx/store';
 
-import * as PlayerModel from '../player/player.model';
+import { PlayerStateInterface } from '../player/player.model';
 import { Player } from '../player/player';
 import { environment } from '../../../environments/environment';
-import { TrackDetailsInterface } from '../track-display/track-display.model';
-
+import { TrackDisplayInterface } from '../track-display/track-display.model';
 import { SpotifyPlayerService } from '../../services/spotify-player.service';
+import { Observable } from 'rxjs';
+import { AppStateInterface } from 'src/app/store/states/app.state';
+import {
+  selectPlayerState,
+  selectTrackDisplay
+} from 'src/app/store/selectors/app.selectors';
 
 @Component({
   selector: 'app-viewer',
@@ -17,43 +23,40 @@ import { SpotifyPlayerService } from '../../services/spotify-player.service';
 export class ViewerComponent implements OnInit {
   private token = environment.spotify.auth.token;
   private player: Player;
-  playerState: PlayerModel.PlayerStateInterface =
-    PlayerModel.InitialPlayerState;
-  trackDetails: TrackDetailsInterface;
   windowRef: any = window;
   playerName = 'SpotyPlayer';
-
+  playerData$: Observable<PlayerStateInterface>;
+  playerData: PlayerStateInterface;
+  trackDisplayData$: Observable<TrackDisplayInterface>;
   bgImage =
     'https://images.unsplash.com/photo-1556988271-ef7cb443eeb8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2857&q=80';
 
   constructor(
     private changeDetector: ChangeDetectorRef,
     private route: ActivatedRoute,
-    private spotifyPlayerService: SpotifyPlayerService
+    private spotifyPlayerService: SpotifyPlayerService,
+    private store: Store<AppStateInterface>
   ) {
-    this.onStateChange = this.onStateChange.bind(this);
     this.onTogglePlay = this.onTogglePlay.bind(this);
+    this.playerData$ = this.store.select(selectPlayerState);
+    this.trackDisplayData$ = this.store.select(selectTrackDisplay);
   }
 
   ngOnInit() {
     this.token = this.route.snapshot.queryParams.token || this.token;
     this.createPlayer();
     this.getTrackDetails();
+    this.playerData$.subscribe(data => {
+      this.playerData = data;
+    });
   }
 
   createPlayer() {
     this.player = this.spotifyPlayerService.initializePlayer({
       token: this.token,
       name: this.playerName,
-      windowRef: this.windowRef,
-      onStateChange: this.onStateChange
+      windowRef: this.windowRef
     });
-  }
-
-  onStateChange(type: string, playerState: PlayerModel.PlayerStateInterface) {
-    // this.playerState = playerState || PlayerModel.InitialPlayerState;
-    // console.log(this.playerState);
-    // this.updateViewer();
   }
 
   updateViewer(): void {
@@ -61,21 +64,8 @@ export class ViewerComponent implements OnInit {
     this.changeDetector.detectChanges();
   }
 
-  getTrackDetails(): void {
-    this.trackDetails = {
-      trackName: get(this.playerState, 'track_window.current_track.name'),
-      artistName: get(
-        this.playerState,
-        'track_window.current_track.artists[0].name'
-      ),
-      album: {
-        albumImageUrl: get(
-          this.playerState,
-          'track_window.current_track.album.images[2].url'
-        ),
-        name: get(this.playerState, 'track_window.current_track.album.name')
-      }
-    };
+  getTrackDetails(): Observable<TrackDisplayInterface> {
+    return this.trackDisplayData$;
   }
 
   getBgImageStyle(): string {
