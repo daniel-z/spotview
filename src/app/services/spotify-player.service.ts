@@ -5,7 +5,7 @@ import { Store, select } from '@ngrx/store';
 import * as PlayerModel from '../components/player/player.model';
 import { Player } from '../components/player/player';
 import { AppStateInterface } from '../store/states/app.state';
-import { selectPlayerState } from '../store/selectors/app.selectors';
+import { selectPlayerState } from '../store/selectors';
 import { PlayerStateChangeAction } from '../store/actions/player.actions';
 
 @Injectable({
@@ -55,7 +55,6 @@ export class SpotifyPlayerService {
 
   onStateChange(type: string, playerState: PlayerModel.PlayerStateInterface) {
     // type: player_state_changed
-    console.log('service', type, playerState);
     this.store.dispatch(new PlayerStateChangeAction(playerState));
   }
 }

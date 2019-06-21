@@ -6,7 +6,6 @@ import { get } from 'lodash';
 export const selectPlayerState = (
   state: AppStateInterface
 ): PlayerStateInterface => {
-  console.log('selector', state);
   return state.player;
 };
 

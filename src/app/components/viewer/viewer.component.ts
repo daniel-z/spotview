@@ -10,10 +10,7 @@ import { TrackDisplayInterface } from '../track-display/track-display.model';
 import { SpotifyPlayerService } from '../../services/spotify-player.service';
 import { Observable } from 'rxjs';
 import { AppStateInterface } from 'src/app/store/states/app.state';
-import {
-  selectPlayerState,
-  selectTrackDisplay
-} from 'src/app/store/selectors/app.selectors';
+import { selectPlayerState, selectTrackDisplay } from 'src/app/store/selectors';
 
 @Component({
   selector: 'app-viewer',
@@ -59,11 +56,6 @@ export class ViewerComponent implements OnInit {
     });
   }
 
-  updateViewer(): void {
-    this.getTrackDetails();
-    this.changeDetector.detectChanges();
-  }
-
   getTrackDetails(): Observable<TrackDisplayInterface> {
     return this.trackDisplayData$;
   }
@@ -81,7 +73,7 @@ export class ViewerComponent implements OnInit {
   }
 
   onResize(): void {
-    this.updateViewer();
+    this.changeDetector.detectChanges();
   }
 
   onTogglePlay(): void {

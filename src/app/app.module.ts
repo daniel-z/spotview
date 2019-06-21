@@ -8,7 +8,7 @@ import { ViewerComponent } from './components/viewer/viewer.component';
 import { TrackDisplayComponent } from './components/track-display/track-display.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { TrackControlsComponent } from './components/track-controls/track-controls.component';
-import { AppReducers } from './store/reducers/app.reducers';
+import { AppReducers } from './store/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 
