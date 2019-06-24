@@ -1,0 +1,44 @@
+@import '../../../styles/variables';
+@import '../../../styles/media-queries';
+@import '../../../styles/utils';
+
+$config-item-text-color-hidden: $color-gray-c;
+$config-item-text-color-hover: $color-gray-a;
+$config-item-text-ffamily: $font-family-light;
+$config-item-text-fsize: 12px;
+
+.config-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  margin: 20px 0 0 20px;
+  display: flex;
+
+  .config-item {
+    display: block;
+    opacity: 0.8;
+    transition: 0.5s opacity, 0.5s color;
+    text-align: center;
+    width: 150px;
+    cursor: pointer;
+    color: $config-item-text-color-hidden;
+
+    &:hover {
+      opacity: 1;
+      color: $config-item-text-color-hover;
+    }
+
+    i {
+      font-size: 30px;
+      display: block;
+    }
+
+    span {
+      text-transform: uppercase;
+      font-family: $config-item-text-ffamily;
+      font-style: normal;
+      font-size: $config-item-text-fsize;
+    }
+  }
+}

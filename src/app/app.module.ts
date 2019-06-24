@@ -12,6 +12,7 @@ import { AppReducers } from './store/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { TrackAlbumArtComponent } from './components/track-display/track-album-art/track-album-art.component';
+import { ConfigBarComponent } from './components/viewer/config-bar/config-bar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TrackAlbumArtComponent } from './components/track-display/track-album-a
     TrackDisplayComponent,
     AuthComponent,
     TrackControlsComponent,
-    TrackAlbumArtComponent
+    TrackAlbumArtComponent,
+    ConfigBarComponent
   ],
   imports: [
     BrowserModule,

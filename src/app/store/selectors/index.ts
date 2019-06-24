@@ -4,6 +4,7 @@ import { PlayerStateInterface } from '../states/player.state';
 import { TrackDisplayInterface } from '../states/track-display.state';
 import { AppStateInterface } from '../states/app.state';
 import { ViewerStateInterface } from '../states/viewer.state';
+import { ConfigBarStateInterface } from '../states/config-bar.state';
 
 //  Player State Selector
 export const selectPlayerState = (
@@ -35,4 +36,11 @@ export const selectViewerState = (
   state: AppStateInterface
 ): ViewerStateInterface => {
   return state.viewer;
+};
+
+//  Viewer State Selector
+export const selectViewerConfigState = (
+  state: AppStateInterface
+): ConfigBarStateInterface => {
+  return state.viewer.config;
 };

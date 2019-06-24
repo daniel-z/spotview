@@ -5,6 +5,8 @@
 .viewer-container {
   display: block;
   filter: blur(1);
+  position: relative;
+
   @include center-bg();
 
   @include md-up {
