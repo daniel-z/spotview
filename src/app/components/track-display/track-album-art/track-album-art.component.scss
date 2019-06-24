@@ -1,0 +1,44 @@
+@import '../../../styles/variables';
+@import '../../../styles/media-queries';
+@import '../../../styles/utils';
+@import '../styles/track-variables.scss';
+
+.track {
+  &-album-art {
+    @include center-bg();
+    @include track-sizes();
+
+    display: block;
+    transition: opacity 1s;
+    position: relative;
+    opacity: 1;
+
+    @include md-up {
+      opacity: 0.1;
+    }
+
+    &:hover {
+      opacity: 1;
+      transition: opacity 1s;
+
+      &-overlay {
+        background-image: linear-gradient(
+          to top,
+          $track-overlay-gradient-a,
+          $track-overlay-gradient-b
+        );
+        opacity: 0.3;
+      }
+    }
+  }
+
+  &-overlay {
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}

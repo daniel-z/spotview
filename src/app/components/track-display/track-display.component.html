@@ -1,13 +1,7 @@
 <div class="track-wrapper">
-  <div
-    class="track-display"
-    *ngIf="trackDisplayData"
-    [ngStyle]="{
-      'background-image': getAlbumImageUrl()
-    }"
-  >
-    <div class="track-overlay"></div>
-  </div>
+  <app-track-album-art
+    [albumImageUrl]="getAlbumImageUrl()"
+  ></app-track-album-art>
   <div class="extras-container">
     <div class="track-info">
       <span class="track-name">

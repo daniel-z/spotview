@@ -6,7 +6,7 @@ import * as TrackDisplay from './track-display.model';
 @Component({
   selector: 'app-track-display',
   templateUrl: './track-display.component.html',
-  styleUrls: ['./track-display.component.scss']
+  styleUrls: ['./styles/track-display.component.scss']
 })
 export class TrackDisplayComponent implements OnInit {
   @Input() trackDisplayData: TrackDisplay.TrackDisplayInterface =
@@ -16,9 +16,7 @@ export class TrackDisplayComponent implements OnInit {
 
   constructor(private changeDetector: ChangeDetectorRef) {}
 
-  ngOnInit() {
-    console.log('TrackDisplayComponent', this.trackDisplayData);
-  }
+  ngOnInit() {}
 
   getAlbumImageUrl(): string {
     const imageURl = get(this.trackDisplayData, 'album.albumImageUrl');

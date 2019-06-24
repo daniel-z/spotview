@@ -7,10 +7,11 @@ import { AppComponent } from './app.component';
 import { ViewerComponent } from './components/viewer/viewer.component';
 import { TrackDisplayComponent } from './components/track-display/track-display.component';
 import { AuthComponent } from './components/auth/auth.component';
-import { TrackControlsComponent } from './components/track-controls/track-controls.component';
+import { TrackControlsComponent } from './components/track-display/track-controls/track-controls.component';
 import { AppReducers } from './store/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { TrackAlbumArtComponent } from './components/track-display/track-album-art/track-album-art.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { environment } from '../environments/environment';
     ViewerComponent,
     TrackDisplayComponent,
     AuthComponent,
-    TrackControlsComponent
+    TrackControlsComponent,
+    TrackAlbumArtComponent
   ],
   imports: [
     BrowserModule,

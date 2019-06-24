@@ -1,0 +1,61 @@
+@import '../../../styles/variables';
+@import '../../../styles/media-queries';
+@import '../../../styles/utils';
+@import './track-variables.scss';
+
+.track {
+  &-wrapper {
+    display: block;
+    @include track-sizes();
+
+    @include md-up {
+      position: relative;
+    }
+  }
+}
+
+.extras-container {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 80px;
+  text-shadow: 0 0 8px $color-gray-c;
+
+  @include md-up {
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .track {
+    &-info {
+      color: $color-white;
+      width: $track-disp-width-xs;
+      height: $track-disp-height-xs;
+      margin: 0;
+      padding: 0;
+      height: auto;
+    }
+
+    &-name,
+    &-album {
+      text-align: center;
+      width: 100%;
+      display: block;
+      text-align: center;
+      line-height: 1em;
+      text-transform: uppercase;
+      margin-top: 9px;
+      text-shadow: 0px 0px 40px #000;
+    }
+
+    &-name {
+      font-size: $track-name-fsize;
+      font-family: $font-family-extra-bold;
+    }
+
+    &-album {
+      font-size: $track-albumname-fsize;
+      font-family: $font-family-light;
+    }
+  }
+}
