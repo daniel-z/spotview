@@ -7,10 +7,16 @@ import { PlayerStateInterface } from '../player/player.model';
 import { Player } from '../player/player';
 import { environment } from '../../../environments/environment';
 import { TrackDisplayInterface } from '../track-display/track-display.model';
+import { ViewerStateInterface } from './viewer.model';
 import { SpotifyPlayerService } from '../../services/spotify-player.service';
 import { Observable } from 'rxjs';
 import { AppStateInterface } from 'src/app/store/states/app.state';
-import { selectPlayerState, selectTrackDisplay } from 'src/app/store/selectors';
+import {
+  selectPlayerState,
+  selectTrackDisplay,
+  selectViewerState
+} from 'src/app/store/selectors';
+import { InitialViewerStateInterface } from './viewer.model';
 
 @Component({
   selector: 'app-viewer',
@@ -25,8 +31,8 @@ export class ViewerComponent implements OnInit {
   playerData$: Observable<PlayerStateInterface>;
   playerData: PlayerStateInterface;
   trackDisplayData$: Observable<TrackDisplayInterface>;
-  bgImage =
-    'https://images.unsplash.com/photo-1556988271-ef7cb443eeb8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2857&q=80';
+  viewer$: Observable<ViewerStateInterface>;
+  bgImage: string;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -37,14 +43,20 @@ export class ViewerComponent implements OnInit {
     this.onTogglePlay = this.onTogglePlay.bind(this);
     this.playerData$ = this.store.select(selectPlayerState);
     this.trackDisplayData$ = this.store.select(selectTrackDisplay);
+    this.viewer$ = this.store.select(selectViewerState);
   }
 
   ngOnInit() {
     this.token = this.route.snapshot.queryParams.token || this.token;
     this.createPlayer();
     this.getTrackDetails();
+
     this.playerData$.subscribe(data => {
       this.playerData = data;
+    });
+
+    this.viewer$.subscribe(vwstate => {
+      this.bgImage = vwstate.bgImage;
     });
   }
 

@@ -1,14 +1,18 @@
-import { PlayerStateInterface } from '../states/player.state';
-import { TrackDisplayInterface } from '../states/track-display-state';
-import { AppStateInterface } from '../states/app.state';
 import { get } from 'lodash';
 
+import { PlayerStateInterface } from '../states/player.state';
+import { TrackDisplayInterface } from '../states/track-display.state';
+import { AppStateInterface } from '../states/app.state';
+import { ViewerStateInterface } from '../states/viewer.state';
+
+//  Player State Selector
 export const selectPlayerState = (
   state: AppStateInterface
 ): PlayerStateInterface => {
   return state.player;
 };
 
+//  Track Selector
 export const selectTrackDisplay = (
   state: AppStateInterface
 ): TrackDisplayInterface => {
@@ -24,4 +28,11 @@ export const selectTrackDisplay = (
     }
   };
   return trackDisplayState;
+};
+
+//  Viewer State Selector
+export const selectViewerState = (
+  state: AppStateInterface
+): ViewerStateInterface => {
+  return state.viewer;
 };

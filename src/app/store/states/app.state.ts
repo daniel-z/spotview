@@ -4,13 +4,19 @@ import {
   PlayerStateInterface
 } from '../states/player.state';
 
+import {
+  InitialViewerState,
+  ViewerStateInterface
+} from '../states/viewer.state';
 export interface AppStateInterface {
   router?: RouterReducerState;
   player: PlayerStateInterface;
+  viewer: ViewerStateInterface;
 }
 
 export const InitialAppState: AppStateInterface = {
-  player: InitialPlayerState
+  player: InitialPlayerState,
+  viewer: InitialViewerState
 };
 
 export function getInitialState(): AppStateInterface {
