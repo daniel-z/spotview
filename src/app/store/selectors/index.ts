@@ -18,6 +18,7 @@ export const selectTrackDisplay = (
   state: AppStateInterface
 ): TrackDisplayInterface => {
   const trackDisplayState = {
+    displayAlbumArt: get(state, 'viewer.config.displayAlbumArt'),
     trackName: get(state, 'player.track_window.current_track.name'),
     artistName: get(state, 'player.track_window.current_track.artists[0].name'),
     album: {
@@ -38,7 +39,7 @@ export const selectViewerState = (
   return state.viewer;
 };
 
-//  Viewer State Selector
+//  Config State Selector
 export const selectViewerConfigState = (
   state: AppStateInterface
 ): ConfigBarStateInterface => {

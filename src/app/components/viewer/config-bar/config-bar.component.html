@@ -1,7 +1,7 @@
 <div class="config-bar">
-  <div class="config-item">
-    <i class="fas fa-eye" *ngIf="!configBarState.albumArtHidden"></i>
-    <i class="fas fa-eye-slash" *ngIf="configBarState.albumArtHidden"></i>
+  <div class="config-item" (click)="toggleAlbumArt()">
+    <i class="fas fa-eye" *ngIf="!configBarState.displayAlbumArt"></i>
+    <i class="fas fa-eye-slash" *ngIf="configBarState.displayAlbumArt"></i>
     <span>Toggle Album Art</span>
   </div>
 </div>

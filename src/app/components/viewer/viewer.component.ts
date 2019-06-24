@@ -16,7 +16,7 @@ import {
   selectTrackDisplay,
   selectViewerState
 } from 'src/app/store/selectors';
-import { InitialViewerStateInterface } from './viewer.model';
+import { ConfigBarStateInterface } from './config-bar/config-bar.model';
 
 @Component({
   selector: 'app-viewer',
@@ -33,6 +33,7 @@ export class ViewerComponent implements OnInit {
   trackDisplayData$: Observable<TrackDisplayInterface>;
   viewer$: Observable<ViewerStateInterface>;
   bgImage: string;
+  configBarState: ConfigBarStateInterface;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -57,6 +58,7 @@ export class ViewerComponent implements OnInit {
 
     this.viewer$.subscribe(vwstate => {
       this.bgImage = vwstate.bgImage;
+      this.configBarState = vwstate.config;
     });
   }
 

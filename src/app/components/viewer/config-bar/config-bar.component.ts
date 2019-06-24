@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppStateInterface } from 'src/app/store/states/app.state';
 import { selectViewerConfigState } from 'src/app/store/selectors';
-
+import { ViewerConfigBarToggleAArtAction } from 'src/app/store/actions/viewer.actions';
 @Component({
   selector: 'app-config-bar',
   templateUrl: './config-bar.component.html',
@@ -17,9 +17,15 @@ export class ConfigBarComponent implements OnInit {
   constructor(private store: Store<AppStateInterface>) {}
 
   ngOnInit() {
-    this.configBar$ = this.store.select(selectViewerConfigState);
-    this.configBar$.subscribe(configBarState => {
+    this.store.select(selectViewerConfigState).subscribe(configBarState => {
       this.configBarState = configBarState;
     });
+  }
+  toggleAlbumArt() {
+    this.store.dispatch(
+      new ViewerConfigBarToggleAArtAction({
+        displayAlbumArt: !this.configBarState.displayAlbumArt
+      })
+    );
   }
 }

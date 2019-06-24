@@ -1,5 +1,6 @@
 <div class="track-wrapper">
   <app-track-album-art
+    *ngIf="trackDisplayData.displayAlbumArt"
     [albumImageUrl]="getAlbumImageUrl()"
   ></app-track-album-art>
   <div class="extras-container">

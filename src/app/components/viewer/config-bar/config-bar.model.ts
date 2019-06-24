@@ -1,7 +1,7 @@
 export interface ConfigBarStateInterface {
-  albumArtHidden: boolean;
+  displayAlbumArt: boolean;
 }
 
 export const InitialConfigBarStateInterface: ConfigBarStateInterface = {
-  albumArtHidden: false
+  displayAlbumArt: true
 };
