@@ -8,15 +8,19 @@ import {
   InitialViewerState,
   ViewerStateInterface
 } from '../states/viewer.state';
+
+import { InitialAuthState, AuthStateInterface } from '../states/auth.state';
 export interface AppStateInterface {
   router?: RouterReducerState;
   player: PlayerStateInterface;
   viewer: ViewerStateInterface;
+  auth: AuthStateInterface;
 }
 
 export const InitialAppState: AppStateInterface = {
   player: InitialPlayerState,
-  viewer: InitialViewerState
+  viewer: InitialViewerState,
+  auth: InitialAuthState
 };
 
 export function getInitialState(): AppStateInterface {

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppStateInterface } from 'src/app/store/states/app.state';
 import { AuthStateInterface, InitialAuthState } from './auth.model';
+import { AuthSetCredentialsAction } from 'src/app/store/actions/auth.actions';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -11,7 +12,7 @@ import { AuthStateInterface, InitialAuthState } from './auth.model';
 })
 export class AuthComponent implements OnInit {
   token = '';
-  authData: AuthStateInterface = InitialAuthState;
+  authData: AuthStateInterface = {};
   queryFragment = [];
   spotify = {
     scopes: [
@@ -31,6 +32,9 @@ export class AuthComponent implements OnInit {
 
   ngOnInit() {
     this.getAuthDataFromQString();
+    if (this.authData.access_token) {
+      this.store.dispatch(new AuthSetCredentialsAction(this.authData));
+    }
   }
 
   getAuthDataFromQString() {
