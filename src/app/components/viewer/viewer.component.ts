@@ -18,6 +18,7 @@ import {
 } from 'src/app/store/selectors';
 import { ConfigBarStateInterface } from './config-bar/config-bar.model';
 import { ViewerBGImageChangeAction } from '../../store/actions/viewer.actions';
+import { SpotifyAuthService } from 'src/app/services/spotify-auth.service';
 
 @Component({
   selector: 'app-viewer',
@@ -53,15 +54,15 @@ export class ViewerComponent implements OnInit {
       this.token = authData.access_token;
       this.createPlayer();
       this.getTrackDetails();
+    });
 
-      this.playerData$.subscribe(data => {
-        this.playerData = data;
-      });
+    this.playerData$.subscribe(data => {
+      this.playerData = data;
+    });
 
-      this.viewer$.subscribe(vwstate => {
-        this.bgImage = vwstate.bgImage;
-        this.configBarState = vwstate.config;
-      });
+    this.viewer$.subscribe(vwstate => {
+      this.bgImage = vwstate.bgImage;
+      this.configBarState = vwstate.config;
     });
   }
 

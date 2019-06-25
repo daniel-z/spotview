@@ -39,16 +39,6 @@ export class SpotifyAuthService {
     });
   }
 
-  saveAuthDataFromQueryFragment(queryFragment: string) {
-    const authData: AuthStateInterface = { ...InitialAuthState };
-    queryFragment.split('&').forEach(str => {
-      const [key, value] = str.split('=');
-      authData[key] = value;
-    });
-    authData.auth_timestamp = new Date().getTime().toString();
-    this.saveSpotifyAuthData(authData);
-  }
-
   private saveSpotifyAuthData(authData: AuthStateInterface) {
     this.store.dispatch(new AuthSetCredentialsAction(authData));
   }
@@ -59,7 +49,7 @@ export class SpotifyAuthService {
     });
   }
 
-  getAuthFromLocalStorage() {
+  private getAuthFromLocalStorage() {
     const authData: AuthStateInterface = { ...InitialAuthState };
     Object.keys(authData).forEach(key => {
       authData[key] = localStorage.getItem(
@@ -79,12 +69,12 @@ export class SpotifyAuthService {
     this.saveSpotifyAuthData(authData);
   }
 
-  cleanAllAuthData() {
+  private cleanAllAuthData() {
     this.cleanLSAuthData();
     this.store.dispatch(new AuthSetCredentialsAction({ ...InitialAuthState }));
   }
 
-  isAccessExpired(authData: AuthStateInterface) {
+  private isAccessExpired(authData: AuthStateInterface) {
     const actualTimeStamp = new Date().getTime();
     const tokenTimeStamp =
       parseInt(authData.auth_timestamp, 10) +
@@ -92,13 +82,30 @@ export class SpotifyAuthService {
     return actualTimeStamp > tokenTimeStamp;
   }
 
-  cleanLSAuthData() {
+  private cleanLSAuthData() {
     const authData: AuthStateInterface = { ...InitialAuthState };
     Object.keys(authData).forEach(key => {
       authData[key] = localStorage.removeItem(
         `${this.prependLocalStorage}_${key}`
       );
     });
+  }
+
+  isAuthorized() {
+    return (
+      this.actualAuthData.access_token &&
+      !this.isAccessExpired(this.actualAuthData)
+    );
+  }
+
+  saveAuthDataFromQueryFragment(queryFragment: string) {
+    const authData: AuthStateInterface = { ...InitialAuthState };
+    queryFragment.split('&').forEach(str => {
+      const [key, value] = str.split('=');
+      authData[key] = value;
+    });
+    authData.auth_timestamp = new Date().getTime().toString();
+    this.saveSpotifyAuthData(authData);
   }
 
   requestSpotifyAccess() {
