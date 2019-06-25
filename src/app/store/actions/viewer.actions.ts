@@ -1,6 +1,5 @@
 import { Action } from '@ngrx/store';
 import { ViewerStateInterface } from '../../components/viewer/viewer.model';
-import { ConfigBarStateInterface } from '../../components/viewer/config-bar/config-bar.model';
 
 export enum ViewerActions {
   VIEWER_BGIMAGE_CHANGE = 'VIEWER_BGIMAGE_CHANGE',
@@ -10,7 +9,7 @@ export enum ViewerActions {
 
 export class ViewerBGImageChangeAction implements Action {
   readonly type: string = ViewerActions.VIEWER_BGIMAGE_CHANGE;
-  constructor(public payload: ViewerStateInterface) {}
+  constructor(public payload: { bgImage: string }) {}
 }
 
 export class ViewerConfigBarToggleAArtAction implements Action {

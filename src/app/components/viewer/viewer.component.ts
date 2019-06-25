@@ -17,6 +17,7 @@ import {
   selectViewerState
 } from 'src/app/store/selectors';
 import { ConfigBarStateInterface } from './config-bar/config-bar.model';
+import { ViewerBGImageChangeAction } from '../../store/actions/viewer.actions';
 
 @Component({
   selector: 'app-viewer',

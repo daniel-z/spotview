@@ -5,7 +5,7 @@
 $config-item-text-color-hidden: $color-gray-c;
 $config-item-text-color-hover: $color-gray-a;
 $config-item-text-ffamily: $font-family-light;
-$config-item-text-fsize: 12px;
+$config-item-text-fsize: 9px;
 
 .config-bar {
   position: absolute;
@@ -31,7 +31,7 @@ $config-item-text-fsize: 12px;
     }
 
     i {
-      font-size: 30px;
+      font-size: 16px;
       display: block;
     }
 

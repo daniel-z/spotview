@@ -6,8 +6,11 @@ import { AppStateInterface } from 'src/app/store/states/app.state';
 import { selectViewerConfigState } from 'src/app/store/selectors';
 import {
   ViewerConfigBarToggleAArtAction,
-  ViewerConfigBarToggleAlwaysVisibleAArtAction
+  ViewerConfigBarToggleAlwaysVisibleAArtAction,
+  ViewerBGImageChangeAction
 } from 'src/app/store/actions/viewer.actions';
+import { BgImagesPool } from '../viewer.model';
+
 @Component({
   selector: 'app-config-bar',
   templateUrl: './config-bar.component.html',
@@ -16,6 +19,7 @@ import {
 export class ConfigBarComponent implements OnInit {
   configBarState: ConfigBarStateInterface;
   configBar$: Observable<ConfigBarStateInterface>;
+  bgImageIndex = 0;
 
   constructor(private store: Store<AppStateInterface>) {}
 
@@ -24,6 +28,16 @@ export class ConfigBarComponent implements OnInit {
       this.configBarState = configBarState;
     });
   }
+
+  changeViewerBackground() {
+    this.bgImageIndex = this.bgImageIndex + 1;
+    if (this.bgImageIndex > BgImagesPool.length - 1) {
+      this.bgImageIndex = 0;
+    }
+    const bgImage = BgImagesPool[this.bgImageIndex];
+    this.store.dispatch(new ViewerBGImageChangeAction({ bgImage }));
+  }
+
   toggleAlbumArtVisibility() {
     this.store.dispatch(
       new ViewerConfigBarToggleAlwaysVisibleAArtAction({
@@ -31,6 +45,7 @@ export class ConfigBarComponent implements OnInit {
       })
     );
   }
+
   toggleAlbumArt() {
     this.store.dispatch(
       new ViewerConfigBarToggleAArtAction({
