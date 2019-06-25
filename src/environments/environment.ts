@@ -6,7 +6,9 @@ export const environment = {
   production: false,
   spotify: {
     auth: {
-      clientId: '09b24f2eda9e45d3a815f95d88a129e1'
+      clientId: '09b24f2eda9e45d3a815f95d88a129e1',
+      authorizeUrl: 'https://accounts.spotify.com/authorize',
+      callbackUrl: 'https://localhost:3000/auth'
     }
   }
 };

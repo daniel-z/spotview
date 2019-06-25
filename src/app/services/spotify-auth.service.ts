@@ -22,16 +22,12 @@ export class SpotifyAuthService {
   private prependLocalStorage = 'vision_auth';
   actualAuthData: AuthStateInterface = { ...InitialAuthState };
 
-  spotify = {
-    scopes: [
-      'streaming',
-      'user-read-birthdate',
-      'user-read-email',
-      'user-read-private'
-    ],
-    SAuthorizeUrl: 'https://accounts.spotify.com/authorize',
-    appAuthUrl: 'https://localhost:3000/auth'
-  };
+  private spotifyScopes = [
+    'streaming',
+    'user-read-birthdate',
+    'user-read-email',
+    'user-read-private'
+  ];
 
   constructor(private store: Store<AppStateInterface>) {
     this.getAuthFromLocalStorage();
@@ -91,7 +87,8 @@ export class SpotifyAuthService {
   isAccessExpired(authData: AuthStateInterface) {
     const actualTimeStamp = new Date().getTime();
     const tokenTimeStamp =
-      parseInt(authData.auth_timestamp, 10) + parseInt(authData.expires_in, 10);
+      parseInt(authData.auth_timestamp, 10) +
+      parseInt(authData.expires_in, 10) * 1000;
     return actualTimeStamp > tokenTimeStamp;
   }
 
@@ -106,8 +103,8 @@ export class SpotifyAuthService {
 
   requestSpotifyAccess() {
     const qp = {
-      redirect_uri: encodeURIComponent(this.spotify.appAuthUrl),
-      scope: encodeURIComponent(this.spotify.scopes.join(' ')),
+      redirect_uri: encodeURIComponent(environment.spotify.auth.callbackUrl),
+      scope: encodeURIComponent(this.spotifyScopes.join(' ')),
       response_type: 'token',
       state: 'dz'
     };
@@ -120,6 +117,8 @@ export class SpotifyAuthService {
       queryString = queryString + `&${param}=${qp[param]}`;
     });
 
-    window.location.href = `${this.spotify.SAuthorizeUrl}${queryString}`;
+    window.location.href = `${
+      environment.spotify.auth.authorizeUrl
+    }${queryString}`;
   }
 }
