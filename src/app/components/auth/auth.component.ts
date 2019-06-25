@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -12,7 +13,7 @@ import { AuthSetCredentialsAction } from 'src/app/store/actions/auth.actions';
 })
 export class AuthComponent implements OnInit {
   token = '';
-  authData: AuthStateInterface = {};
+  authData: AuthStateInterface = InitialAuthState;
   queryFragment = [];
   spotify = {
     scopes: [
@@ -27,6 +28,7 @@ export class AuthComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private store: Store<AppStateInterface>
   ) {}
 
@@ -34,6 +36,7 @@ export class AuthComponent implements OnInit {
     this.getAuthDataFromQString();
     if (this.authData.access_token) {
       this.store.dispatch(new AuthSetCredentialsAction(this.authData));
+      this.router.navigate(['/']);
     }
   }
 
