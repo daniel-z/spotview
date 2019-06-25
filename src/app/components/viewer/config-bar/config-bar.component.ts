@@ -4,7 +4,10 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppStateInterface } from 'src/app/store/states/app.state';
 import { selectViewerConfigState } from 'src/app/store/selectors';
-import { ViewerConfigBarToggleAArtAction } from 'src/app/store/actions/viewer.actions';
+import {
+  ViewerConfigBarToggleAArtAction,
+  ViewerConfigBarToggleAlwaysVisibleAArtAction
+} from 'src/app/store/actions/viewer.actions';
 @Component({
   selector: 'app-config-bar',
   templateUrl: './config-bar.component.html',
@@ -20,6 +23,13 @@ export class ConfigBarComponent implements OnInit {
     this.store.select(selectViewerConfigState).subscribe(configBarState => {
       this.configBarState = configBarState;
     });
+  }
+  toggleAlbumArtVisibility() {
+    this.store.dispatch(
+      new ViewerConfigBarToggleAlwaysVisibleAArtAction({
+        albumArtAlwaysVisible: !this.configBarState.albumArtAlwaysVisible
+      })
+    );
   }
   toggleAlbumArt() {
     this.store.dispatch(

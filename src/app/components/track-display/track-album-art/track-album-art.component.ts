@@ -10,10 +10,15 @@ import * as TrackDisplay from '../track-display.model';
 })
 export class TrackAlbumArtComponent implements OnInit {
   @Input() albumImageUrl: string;
+  @Input() albumArtAlwaysVisible: boolean;
 
   constructor(private changeDetector: ChangeDetectorRef) {}
 
   ngOnInit() {}
+
+  isAlbumArtAlwaysVisible(): string {
+    return this.albumArtAlwaysVisible ? 'always-visible' : '';
+  }
 
   getAlbumImageUrl(): string {
     return this.albumImageUrl;

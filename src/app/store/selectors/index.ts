@@ -18,6 +18,7 @@ export const selectTrackDisplay = (
   state: AppStateInterface
 ): TrackDisplayInterface => {
   const trackDisplayState = {
+    albumArtAlwaysVisible: get(state, 'viewer.config.albumArtAlwaysVisible'),
     displayAlbumArt: get(state, 'viewer.config.displayAlbumArt'),
     trackName: get(state, 'player.track_window.current_track.name'),
     artistName: get(state, 'player.track_window.current_track.artists[0].name'),

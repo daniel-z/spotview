@@ -15,6 +15,10 @@
 
     @include md-up {
       opacity: 0.1;
+
+      &.always-visible {
+        opacity: 1;
+      }
     }
 
     &:hover {

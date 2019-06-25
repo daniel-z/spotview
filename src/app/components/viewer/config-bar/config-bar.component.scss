@@ -20,7 +20,8 @@ $config-item-text-fsize: 12px;
     opacity: 0.8;
     transition: 0.5s opacity, 0.5s color;
     text-align: center;
-    width: 150px;
+    width: auto;
+    padding: 5px;
     cursor: pointer;
     color: $config-item-text-color-hidden;
 

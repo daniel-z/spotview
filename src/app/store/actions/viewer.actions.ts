@@ -4,7 +4,8 @@ import { ConfigBarStateInterface } from '../../components/viewer/config-bar/conf
 
 export enum ViewerActions {
   VIEWER_BGIMAGE_CHANGE = 'VIEWER_BGIMAGE_CHANGE',
-  VIEWER_CONFIG_TOGGLEAART = 'VIEWER_CONFIG_TOGGLEAART'
+  VIEWER_CONFIG_TOGGLEAART = 'VIEWER_CONFIG_TOGGLEAART',
+  VIEWER_CONFIG_TOGGLE_ALWAYS_VISIBLE_AART = 'VIEWER_CONFIG_TOGGLE_ALWAYS_VISIBLE_AART'
 }
 
 export class ViewerBGImageChangeAction implements Action {
@@ -17,6 +18,13 @@ export class ViewerConfigBarToggleAArtAction implements Action {
   constructor(public payload: { displayAlbumArt: boolean }) {}
 }
 
+export class ViewerConfigBarToggleAlwaysVisibleAArtAction implements Action {
+  readonly type: string =
+    ViewerActions.VIEWER_CONFIG_TOGGLE_ALWAYS_VISIBLE_AART;
+  constructor(public payload: { albumArtAlwaysVisible: boolean }) {}
+}
+
 export type ViewerActionType =
   | ViewerBGImageChangeAction
-  | ViewerConfigBarToggleAArtAction;
+  | ViewerConfigBarToggleAArtAction
+  | ViewerConfigBarToggleAlwaysVisibleAArtAction;

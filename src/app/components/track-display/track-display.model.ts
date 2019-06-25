@@ -1,5 +1,6 @@
 export interface TrackDisplayInterface {
   displayAlbumArt: boolean;
+  albumArtAlwaysVisible: boolean;
   trackName: string;
   artistName: string;
   album: {
@@ -13,6 +14,7 @@ const InitialTrackBgImage =
 
 export const InitialTrackDisplayState: TrackDisplayInterface = {
   displayAlbumArt: true,
+  albumArtAlwaysVisible: false,
   trackName: '[No Track]',
   artistName: '[No Artist]',
   album: {
