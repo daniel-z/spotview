@@ -5,7 +5,6 @@ import { Store, select } from '@ngrx/store';
 
 import { PlayerStateInterface } from '../player/player.model';
 import { Player } from '../player/player';
-import { environment } from '../../../environments/environment';
 import { TrackDisplayInterface } from '../track-display/track-display.model';
 import { ViewerStateInterface } from './viewer.model';
 import { SpotifyPlayerService } from '../../services/spotify-player.service';
@@ -25,7 +24,7 @@ import { ViewerBGImageChangeAction } from '../../store/actions/viewer.actions';
   styleUrls: ['./viewer.component.scss']
 })
 export class ViewerComponent implements OnInit {
-  private token = environment.spotify.auth.token;
+  private token = '';
   private player: Player;
   windowRef: any = window;
   playerName = 'SpotyPlayer';
