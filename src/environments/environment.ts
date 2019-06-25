@@ -6,8 +6,7 @@ export const environment = {
   production: false,
   spotify: {
     auth: {
-      clientId: '09b24f2eda9e45d3a815f95d88a129e1',
-      clientSecret: '44d8a4367a164d14b53fa1fda4cce8a4'
+      clientId: '09b24f2eda9e45d3a815f95d88a129e1'
     }
   }
 };
