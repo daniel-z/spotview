@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import {
   AuthStateInterface,
@@ -10,6 +9,8 @@ import { environment } from 'src/environments/environment';
 
 import { AppStateInterface } from '../store/states/app.state';
 import { AuthSetCredentialsAction } from '../store/actions/auth.actions';
+import { selectAuthState } from 'src/app/store/selectors/index';
+
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -17,8 +18,10 @@ import { Router } from '@angular/router';
 })
 export class SpotifyAuthService {
   token = '';
-  authData: AuthStateInterface = InitialAuthState;
   queryFragment = [];
+  private prependLocalStorage = 'vision_auth';
+  actualAuthData: AuthStateInterface = { ...InitialAuthState };
+
   spotify = {
     scopes: [
       'streaming',
@@ -30,17 +33,75 @@ export class SpotifyAuthService {
     appAuthUrl: 'https://localhost:3000/auth'
   };
 
-  constructor(private store: Store<AppStateInterface>) {}
-
-  saveAuthDataFromQueryFragment(queryFragment: string) {
-    queryFragment.split('&').forEach(str => {
-      const [key, value] = str.split('=');
-      this.authData[key] = value;
+  constructor(private store: Store<AppStateInterface>) {
+    this.getAuthFromLocalStorage();
+    this.store.select(selectAuthState).subscribe(authData => {
+      this.actualAuthData = authData;
+      if (authData.access_token) {
+        this.saveToLocalStorage(authData);
+      }
     });
   }
 
-  saveSpotifyAuthData() {
-    this.store.dispatch(new AuthSetCredentialsAction(this.authData));
+  saveAuthDataFromQueryFragment(queryFragment: string) {
+    const authData: AuthStateInterface = { ...InitialAuthState };
+    queryFragment.split('&').forEach(str => {
+      const [key, value] = str.split('=');
+      authData[key] = value;
+    });
+    authData.auth_timestamp = new Date().getTime().toString();
+    this.saveSpotifyAuthData(authData);
+  }
+
+  private saveSpotifyAuthData(authData: AuthStateInterface) {
+    this.store.dispatch(new AuthSetCredentialsAction(authData));
+  }
+
+  private saveToLocalStorage(authData: AuthStateInterface) {
+    Object.keys(authData).forEach(key => {
+      localStorage.setItem(`${this.prependLocalStorage}_${key}`, authData[key]);
+    });
+  }
+
+  getAuthFromLocalStorage() {
+    const authData: AuthStateInterface = { ...InitialAuthState };
+    Object.keys(authData).forEach(key => {
+      authData[key] = localStorage.getItem(
+        `${this.prependLocalStorage}_${key}`
+      );
+    });
+
+    if (authData.access_token === null) {
+      return;
+    }
+
+    if (this.isAccessExpired(authData)) {
+      this.cleanAllAuthData();
+      return;
+    }
+
+    this.saveSpotifyAuthData(authData);
+  }
+
+  cleanAllAuthData() {
+    this.cleanLSAuthData();
+    this.store.dispatch(new AuthSetCredentialsAction({ ...InitialAuthState }));
+  }
+
+  isAccessExpired(authData: AuthStateInterface) {
+    const actualTimeStamp = new Date().getTime();
+    const tokenTimeStamp =
+      parseInt(authData.auth_timestamp, 10) + parseInt(authData.expires_in, 10);
+    return actualTimeStamp > tokenTimeStamp;
+  }
+
+  cleanLSAuthData() {
+    const authData: AuthStateInterface = { ...InitialAuthState };
+    Object.keys(authData).forEach(key => {
+      authData[key] = localStorage.removeItem(
+        `${this.prependLocalStorage}_${key}`
+      );
+    });
   }
 
   requestSpotifyAccess() {

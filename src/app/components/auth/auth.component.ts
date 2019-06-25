@@ -31,6 +31,7 @@ export class AuthComponent implements OnInit {
     if (!this.route.snapshot.fragment) {
       return;
     }
+
     this.spotifyAuthService.saveAuthDataFromQueryFragment(
       this.route.snapshot.fragment
     );
