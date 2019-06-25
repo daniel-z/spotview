@@ -9,6 +9,7 @@ export class Player {
   private spotifyLib: any;
   private windowRef: any;
   private player: any;
+  private name: string;
 
   private onError: PlayerConfigInterface['onError'];
   private onReady: PlayerConfigInterface['onReady'];
@@ -17,6 +18,7 @@ export class Player {
 
   constructor(config: PlayerConfigInterface) {
     this.token = config.token;
+    this.name = config.name || 'spotify cutom player';
     this.windowRef = config.windowRef;
     this.waitForSpotifyToStart();
     this.onError = config.onError;
@@ -36,7 +38,7 @@ export class Player {
   private initPlayer() {
     this.spotifyLib = this.windowRef.Spotify;
     this.player = new this.windowRef.Spotify.Player({
-      name: 'SPOTVIEW',
+      name: this.name,
       getOAuthToken: (cb: (token: string) => void) => {
         cb(this.token);
       }

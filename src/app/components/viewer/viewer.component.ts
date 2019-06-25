@@ -29,7 +29,7 @@ export class ViewerComponent implements OnInit {
   private token = '';
   private player: Player;
   windowRef: any = window;
-  playerName = 'SpotyPlayer';
+  playerName = 'Vision Player';
   playerData$: Observable<PlayerStateInterface>;
   playerData: PlayerStateInterface;
   trackDisplayData$: Observable<TrackDisplayInterface>;
