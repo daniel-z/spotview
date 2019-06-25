@@ -91,7 +91,7 @@ export class SpotifyAuthService {
     });
   }
 
-  isAuthorized() {
+  isAuthorized(): boolean {
     return (
       this.actualAuthData.access_token &&
       !this.isAccessExpired(this.actualAuthData)
