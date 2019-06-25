@@ -3,7 +3,14 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Slab|Limelight|Montserrat+Alternates|Oswald');
 @import url('https://use.fontawesome.com/releases/v5.9.0/css/all.css');
 
+body,
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   background-color: $color-black;
+  height: 100%;
+  font-family: $font-family-light;
 }
