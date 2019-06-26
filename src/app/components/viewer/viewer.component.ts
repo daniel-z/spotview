@@ -35,6 +35,7 @@ export class ViewerComponent implements OnInit {
   viewer$: Observable<ViewerStateInterface>;
   bgImage: string;
   configBarState: ConfigBarStateInterface;
+  isConnected = false;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -54,6 +55,7 @@ export class ViewerComponent implements OnInit {
 
     this.store.select(selectPlayerState).subscribe(playerData => {
       this.playerData = playerData;
+      this.isConnected = this.spotifyPlayerService.isConnected();
     });
 
     this.store.select(selectViewerState).subscribe(vwstate => {

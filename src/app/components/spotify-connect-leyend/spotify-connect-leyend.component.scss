@@ -1,0 +1,34 @@
+@import '../../styles/media-queries';
+@import '../../styles/utils';
+@import '../../styles/variables';
+
+.spotify-connect-wrapper {
+  @include center-children();
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  max-width: 600px;
+  margin: auto;
+
+  @include md-up {
+    max-width: none;
+  }
+  p {
+    display: block;
+    font-family: $font-family-bold;
+    font-weight: bold;
+    color: $color-gray-a;
+    margin-bottom: 25px;
+  }
+
+  img {
+    border: 1px solid $color-black;
+    box-shadow: 1px 1px 10px $color-gray-a;
+    width: 100%;
+
+    @include md-up {
+      width: 50%;
+      height: 50%;
+    }
+  }
+}
