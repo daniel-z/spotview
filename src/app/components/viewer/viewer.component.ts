@@ -30,7 +30,6 @@ export class ViewerComponent implements OnInit {
   private player: Player;
   windowRef: any = window;
   playerName = 'Vision Player';
-  playerData$: Observable<PlayerStateInterface>;
   playerData: PlayerStateInterface;
   trackDisplayData$: Observable<TrackDisplayInterface>;
   viewer$: Observable<ViewerStateInterface>;
@@ -44,9 +43,6 @@ export class ViewerComponent implements OnInit {
     private store: Store<AppStateInterface>
   ) {
     this.onTogglePlay = this.onTogglePlay.bind(this);
-    this.playerData$ = this.store.select(selectPlayerState);
-    this.trackDisplayData$ = this.store.select(selectTrackDisplay);
-    this.viewer$ = this.store.select(selectViewerState);
   }
 
   ngOnInit() {
@@ -56,14 +52,16 @@ export class ViewerComponent implements OnInit {
       this.getTrackDetails();
     });
 
-    this.playerData$.subscribe(data => {
-      this.playerData = data;
+    this.store.select(selectPlayerState).subscribe(playerData => {
+      this.playerData = playerData;
     });
 
-    this.viewer$.subscribe(vwstate => {
+    this.store.select(selectViewerState).subscribe(vwstate => {
       this.bgImage = vwstate.bgImage;
       this.configBarState = vwstate.config;
     });
+
+    this.trackDisplayData$ = this.store.select(selectTrackDisplay);
   }
 
   createPlayer() {

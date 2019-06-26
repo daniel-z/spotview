@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import * as PlayerModel from '../components/player/player.model';
 import { Player } from '../components/player/player';
@@ -14,13 +14,15 @@ import { PlayerStateChangeAction } from '../store/actions/player.actions';
 export class SpotifyPlayerService {
   private player: Player;
   private playerConfig: PlayerModel.PlayerConfigInterface;
-  playerData$: Observable<PlayerModel.PlayerStateInterface>;
 
-  playerState: PlayerModel.PlayerStateInterface =
-    PlayerModel.InitialPlayerState;
+  playerState: PlayerModel.PlayerStateInterface = {
+    ...PlayerModel.InitialPlayerState
+  };
 
   constructor(private store: Store<AppStateInterface>) {
-    this.playerData$ = store.pipe(select(selectPlayerState));
+    this.store.select(selectPlayerState).subscribe(playerData => {
+      this.playerState = playerData;
+    });
 
     this.onReady = this.onReady.bind(this);
     this.onError = this.onError.bind(this);
@@ -39,6 +41,11 @@ export class SpotifyPlayerService {
     }));
   }
 
+  isConnected() {
+    return (
+      this.playerState.timestamp !== PlayerModel.InitialPlayerState.timestamp
+    );
+  }
   onError(type: string, data: object) {
     console.error(type, data);
   }

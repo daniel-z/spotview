@@ -1,4 +1,5 @@
 export interface TrackDisplayInterface {
+  id?: string;
   displayAlbumArt: boolean;
   albumArtAlwaysVisible: boolean;
   trackName: string;

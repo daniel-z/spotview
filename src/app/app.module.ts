@@ -13,6 +13,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { TrackAlbumArtComponent } from './components/track-display/track-album-art/track-album-art.component';
 import { ConfigBarComponent } from './components/viewer/config-bar/config-bar.component';
+import { SpotifyConnectLeyendComponent } from './components/spotify-connect-leyend/spotify-connect-leyend.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ConfigBarComponent } from './components/viewer/config-bar/config-bar.co
     AuthComponent,
     TrackControlsComponent,
     TrackAlbumArtComponent,
-    ConfigBarComponent
+    ConfigBarComponent,
+    SpotifyConnectLeyendComponent
   ],
   imports: [
     BrowserModule,
