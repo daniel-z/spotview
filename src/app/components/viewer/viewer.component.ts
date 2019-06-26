@@ -2,13 +2,13 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { get } from 'lodash';
 import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import { PlayerStateInterface } from '../player/player.model';
 import { Player } from '../player/player';
 import { TrackDisplayInterface } from '../track-display/track-display.model';
 import { ViewerStateInterface } from './viewer.model';
 import { SpotifyPlayerService } from '../../services/spotify-player.service';
-import { Observable } from 'rxjs';
 import { AppStateInterface } from 'src/app/store/states/app.state';
 import {
   selectPlayerState,
@@ -17,7 +17,7 @@ import {
   selectAuthState
 } from 'src/app/store/selectors';
 import { ConfigBarStateInterface } from './config-bar/config-bar.model';
-import { ViewerBGImageChangeAction } from '../../store/actions/viewer.actions';
+import { ViewerBGImagePoolLoadAction } from '../../store/actions/viewer.actions';
 import { SpotifyAuthService } from 'src/app/services/spotify-auth.service';
 import { UnsplashApiService } from 'src/app/services/unsplash-api-service.service';
 
@@ -35,8 +35,10 @@ export class ViewerComponent implements OnInit {
   trackDisplayData$: Observable<TrackDisplayInterface>;
   viewer$: Observable<ViewerStateInterface>;
   bgImage: string;
+  bgImagePool: ViewerStateInterface['bgImagePool'];
   configBarState: ConfigBarStateInterface;
   isConnected = false;
+  UnsplashBgImageCollectionId: '5049158';
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -49,6 +51,10 @@ export class ViewerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store.dispatch(
+      new ViewerBGImagePoolLoadAction(this.UnsplashBgImageCollectionId)
+    );
+
     this.store.select(selectAuthState).subscribe(authData => {
       this.token = authData.access_token;
       this.createPlayer();
@@ -62,13 +68,11 @@ export class ViewerComponent implements OnInit {
 
     this.store.select(selectViewerState).subscribe(vwstate => {
       this.bgImage = vwstate.bgImage;
+      this.bgImagePool = vwstate.bgImagePool;
       this.configBarState = vwstate.config;
     });
 
     this.trackDisplayData$ = this.store.select(selectTrackDisplay);
-    this.unsplashApiService.getCollection().subscribe(data => {
-      console.log(data);
-    });
   }
 
   createPlayer() {

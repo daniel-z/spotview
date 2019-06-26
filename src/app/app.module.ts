@@ -16,7 +16,8 @@ import { ConfigBarComponent } from './components/viewer/config-bar/config-bar.co
 import { SpotifyConnectLeyendComponent } from './components/spotify-connect-leyend/spotify-connect-leyend.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ViewerEffects } from 'src/app/store/effects/viewer.effect';
+import { EffectsModule } from '@ngrx/effects';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: !environment.production // Restrict extension to log-only mode
-    })
+    }),
+    EffectsModule.forRoot([ViewerEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

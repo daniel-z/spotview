@@ -5,11 +5,17 @@ export function ViewerReducer(
   state = InitialViewerState,
   action: ViewerActionType
 ) {
+  const payload = action.payload || {};
   switch (action.type) {
+    case ViewerActions.VIEWER_BGIMAGEPOOL_LOAD:
+      return {
+        ...state
+      };
+    case ViewerActions.VIEWER_BGIMAGEPOOL_LOAD_SUCCESS:
     case ViewerActions.VIEWER_BGIMAGE_CHANGE:
       return {
         ...state,
-        ...action.payload
+        ...payload
       };
     case ViewerActions.VIEWER_CONFIG_TOGGLEAART:
     case ViewerActions.VIEWER_CONFIG_TOGGLE_ALWAYS_VISIBLE_AART:
@@ -17,7 +23,7 @@ export function ViewerReducer(
         ...state,
         config: {
           ...state.config,
-          ...action.payload
+          ...payload
         }
       };
       return newState;

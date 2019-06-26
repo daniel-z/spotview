@@ -2,9 +2,14 @@ import {
   InitialConfigBarStateInterface,
   ConfigBarStateInterface
 } from './config-bar/config-bar.model';
+import {
+  UnsplashImageInterface,
+  InitialUnsplashImageState
+} from 'src/app/models/unsplash-image.model';
 
 export interface ViewerStateInterface {
   bgImage: string;
+  bgImagePool: UnsplashImageInterface[];
   config: ConfigBarStateInterface;
 }
 
@@ -16,6 +21,8 @@ export const BgImagesPool = [
 ];
 
 export const InitialViewerStateInterface: ViewerStateInterface = {
-  bgImage: BgImagesPool[0],
+  bgImage:
+    'https://images.unsplash.com/photo-1556988271-ef7cb443eeb8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2857&q=80',
+  bgImagePool: [InitialUnsplashImageState],
   config: InitialConfigBarStateInterface
 };

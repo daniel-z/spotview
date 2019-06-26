@@ -3,6 +3,8 @@ import { ViewerStateInterface } from '../../components/viewer/viewer.model';
 
 export enum ViewerActions {
   VIEWER_BGIMAGE_CHANGE = 'VIEWER_BGIMAGE_CHANGE',
+  VIEWER_BGIMAGEPOOL_LOAD = 'VIEWER_BGIMAGEPOOL_LOAD',
+  VIEWER_BGIMAGEPOOL_LOAD_SUCCESS = 'VIEWER_BGIMAGEPOOL_LOAD_SUCCESS',
   VIEWER_CONFIG_TOGGLEAART = 'VIEWER_CONFIG_TOGGLEAART',
   VIEWER_CONFIG_TOGGLE_ALWAYS_VISIBLE_AART = 'VIEWER_CONFIG_TOGGLE_ALWAYS_VISIBLE_AART'
 }
@@ -23,7 +25,21 @@ export class ViewerConfigBarToggleAlwaysVisibleAArtAction implements Action {
   constructor(public payload: { albumArtAlwaysVisible: boolean }) {}
 }
 
+export class ViewerBGImagePoolLoadAction implements Action {
+  readonly type: string = ViewerActions.VIEWER_BGIMAGEPOOL_LOAD;
+  constructor(public payload: string) {}
+}
+
+export class ViewerBGImagePoolLoadSuccessAction implements Action {
+  readonly type: string = ViewerActions.VIEWER_BGIMAGEPOOL_LOAD_SUCCESS;
+  constructor(
+    public payload: { bgImagePool: ViewerStateInterface['bgImagePool'] }
+  ) {}
+}
+
 export type ViewerActionType =
   | ViewerBGImageChangeAction
   | ViewerConfigBarToggleAArtAction
-  | ViewerConfigBarToggleAlwaysVisibleAArtAction;
+  | ViewerConfigBarToggleAlwaysVisibleAArtAction
+  | ViewerBGImagePoolLoadAction
+  | ViewerBGImagePoolLoadSuccessAction;
