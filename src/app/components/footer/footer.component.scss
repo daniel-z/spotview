@@ -1,0 +1,26 @@
+@import '../../styles/media-queries';
+@import '../../styles/utils';
+@import '../../styles/variables';
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  text-align: center;
+  transition: 0.3s background-color;
+
+  &:hover {
+    background-color: rgba($color: $color-black, $alpha: 0.5);
+  }
+
+  a {
+    margin: 0 auto;
+    display: inline-block;
+    text-decoration: none;
+    color: $color-white;
+    padding: 10px 50px;
+    width: auto;
+    cursor: pointer;
+  }
+}

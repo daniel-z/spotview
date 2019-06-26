@@ -14,6 +14,7 @@ import { environment } from '../environments/environment';
 import { TrackAlbumArtComponent } from './components/track-display/track-album-art/track-album-art.component';
 import { ConfigBarComponent } from './components/viewer/config-bar/config-bar.component';
 import { SpotifyConnectLeyendComponent } from './components/spotify-connect-leyend/spotify-connect-leyend.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SpotifyConnectLeyendComponent } from './components/spotify-connect-leye
     TrackControlsComponent,
     TrackAlbumArtComponent,
     ConfigBarComponent,
-    SpotifyConnectLeyendComponent
+    SpotifyConnectLeyendComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
