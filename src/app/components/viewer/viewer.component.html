@@ -7,7 +7,7 @@
   }"
   (window:resize)="onResize($event)"
 >
-  <app-config-bar></app-config-bar>
+  <app-config-bar *ngIf="isConnected"></app-config-bar>
   <app-track-display
     *ngIf="isConnected"
     [trackDisplayData]="getTrackDetails() | async"
