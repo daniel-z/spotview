@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType, createEffect } from '@ngrx/effects';
-import { EMPTY, Observable } from 'rxjs';
-import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { UnsplashApiService } from '../../services/unsplash-api-service.service';
 import {
-  ViewerActionType,
-  ViewerBGImagePoolLoadAction,
   ViewerBGImagePoolLoadSuccessAction,
   ViewerActions
 } from '../actions/viewer.actions';
