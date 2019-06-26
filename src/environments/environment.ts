@@ -10,6 +10,12 @@ export const environment = {
       authorizeUrl: 'https://accounts.spotify.com/authorize',
       callbackUrl: 'https://localhost:3000/auth'
     }
+  },
+  unsplash: {
+    baseUrl: 'https://unsp-api-stg.herokuapp.com',
+    endpoints: {
+      collection: '/collection'
+    }
   }
 };
 

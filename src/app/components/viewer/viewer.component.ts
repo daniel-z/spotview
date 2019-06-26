@@ -19,6 +19,7 @@ import {
 import { ConfigBarStateInterface } from './config-bar/config-bar.model';
 import { ViewerBGImageChangeAction } from '../../store/actions/viewer.actions';
 import { SpotifyAuthService } from 'src/app/services/spotify-auth.service';
+import { UnsplashApiService } from 'src/app/services/unsplash-api-service.service';
 
 @Component({
   selector: 'app-viewer',
@@ -41,6 +42,7 @@ export class ViewerComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     private route: ActivatedRoute,
     private spotifyPlayerService: SpotifyPlayerService,
+    private unsplashApiService: UnsplashApiService,
     private store: Store<AppStateInterface>
   ) {
     this.onTogglePlay = this.onTogglePlay.bind(this);
@@ -64,6 +66,9 @@ export class ViewerComponent implements OnInit {
     });
 
     this.trackDisplayData$ = this.store.select(selectTrackDisplay);
+    this.unsplashApiService.getCollection().subscribe(data => {
+      console.log(data);
+    });
   }
 
   createPlayer() {

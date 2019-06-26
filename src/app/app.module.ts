@@ -15,6 +15,7 @@ import { TrackAlbumArtComponent } from './components/track-display/track-album-a
 import { ConfigBarComponent } from './components/viewer/config-bar/config-bar.component';
 import { SpotifyConnectLeyendComponent } from './components/spotify-connect-leyend/spotify-connect-leyend.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { FooterComponent } from './components/footer/footer.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     StoreModule.forRoot(AppReducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
