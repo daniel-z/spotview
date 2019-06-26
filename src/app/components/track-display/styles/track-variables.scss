@@ -7,16 +7,16 @@
 // size
 $track-disp-height-xs: 100%;
 $track-disp-width-xs: 100%;
-$track-disp-height-md: 500px;
-$track-disp-width-md: 500px;
-$track-disp-height-xl: 500px;
-$track-disp-width-xl: 500px;
+$track-disp-height-md: 300px;
+$track-disp-width-md: 300px;
+$track-disp-height-xl: 400px;
+$track-disp-width-xl: 400px;
 
 $track-overlay-gradient-a: $color-red;
 $track-overlay-gradient-b: $color-blue;
 
-$track-name-fsize: $font-medium;
-$track-albumname-fsize: $font-small;
+$track-name-fsize: $font-small;
+$track-albumname-fsize: $font-xsmall;
 
 @mixin track-sizes {
   width: $track-disp-height-xs;
