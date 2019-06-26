@@ -3,13 +3,16 @@ import { ConfigBarStateInterface } from './config-bar.model';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppStateInterface } from 'src/app/store/states/app.state';
-import { selectViewerConfigState } from 'src/app/store/selectors';
+import {
+  selectViewerConfigState,
+  selectViewerState
+} from 'src/app/store/selectors';
 import {
   ViewerConfigBarToggleAArtAction,
   ViewerConfigBarToggleAlwaysVisibleAArtAction,
   ViewerBGImageChangeAction
 } from 'src/app/store/actions/viewer.actions';
-import { BgImagesPool } from '../viewer.model';
+import { ViewerStateInterface } from '../viewer.model';
 
 @Component({
   selector: 'app-config-bar',
@@ -19,23 +22,29 @@ import { BgImagesPool } from '../viewer.model';
 export class ConfigBarComponent implements OnInit {
   configBarState: ConfigBarStateInterface;
   configBar$: Observable<ConfigBarStateInterface>;
-  bgImageIndex = 0;
-
+  bgImageIndex: ViewerStateInterface['bgImageIdx'];
+  BgImagesPool: ViewerStateInterface['bgImagePool'];
   constructor(private store: Store<AppStateInterface>) {}
 
   ngOnInit() {
     this.store.select(selectViewerConfigState).subscribe(configBarState => {
       this.configBarState = configBarState;
     });
+
+    this.store.select(selectViewerState).subscribe(viewerState => {
+      this.BgImagesPool = viewerState.bgImagePool;
+      this.bgImageIndex = viewerState.bgImageIdx;
+    });
   }
 
   changeViewerBackground() {
-    this.bgImageIndex = this.bgImageIndex + 1;
-    if (this.bgImageIndex > BgImagesPool.length - 1) {
-      this.bgImageIndex = 0;
+    let newBgImageIndex = this.bgImageIndex + 1;
+    if (newBgImageIndex > this.BgImagesPool.length - 1) {
+      newBgImageIndex = 0;
     }
-    const bgImage = BgImagesPool[this.bgImageIndex];
-    this.store.dispatch(new ViewerBGImageChangeAction({ bgImage }));
+    this.store.dispatch(
+      new ViewerBGImageChangeAction({ bgImageIdx: newBgImageIndex })
+    );
   }
 
   toggleAlbumArtVisibility() {

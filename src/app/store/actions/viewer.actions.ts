@@ -11,7 +11,7 @@ export enum ViewerActions {
 
 export class ViewerBGImageChangeAction implements Action {
   readonly type: string = ViewerActions.VIEWER_BGIMAGE_CHANGE;
-  constructor(public payload: { bgImage: string }) {}
+  constructor(public payload: { bgImageIdx: number }) {}
 }
 
 export class ViewerConfigBarToggleAArtAction implements Action {

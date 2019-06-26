@@ -13,7 +13,7 @@ export class UnsplashApiService {
 
   constructor(private http: HttpClient) {}
 
-  getCollection(collectionId: number): Observable<UnsplashImageInterface[]> {
+  getCollection(collectionId: string): Observable<UnsplashImageInterface[]> {
     return this.http.get<UnsplashImageInterface[]>(
       `${this.unsplashApi.baseUrl}${
         this.unsplashApi.endpoints.collection

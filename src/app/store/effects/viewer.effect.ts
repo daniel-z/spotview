@@ -20,7 +20,7 @@ export class ViewerEffects {
   @Effect()
   loadBgImages$: Observable<Action> = this.actions$.pipe(
     ofType(ViewerActions.VIEWER_BGIMAGEPOOL_LOAD),
-    switchMap((actionData: { type: string; payload: number }) => {
+    switchMap((actionData: { type: string; payload: string }) => {
       return this.unsplashService.getCollection(actionData.payload).pipe(
         map((data: ViewerStateInterface['bgImagePool']) => {
           return new ViewerBGImagePoolLoadSuccessAction({

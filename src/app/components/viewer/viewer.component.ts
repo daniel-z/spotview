@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { get } from 'lodash';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { PlayerStateInterface } from '../player/player.model';
@@ -18,8 +17,8 @@ import {
 } from 'src/app/store/selectors';
 import { ConfigBarStateInterface } from './config-bar/config-bar.model';
 import { ViewerBGImagePoolLoadAction } from '../../store/actions/viewer.actions';
-import { SpotifyAuthService } from 'src/app/services/spotify-auth.service';
 import { UnsplashApiService } from 'src/app/services/unsplash-api-service.service';
+import { UnsplashImageInterface } from 'src/app/models/unsplash-image.model';
 
 @Component({
   selector: 'app-viewer',
@@ -34,11 +33,11 @@ export class ViewerComponent implements OnInit {
   playerData: PlayerStateInterface;
   trackDisplayData$: Observable<TrackDisplayInterface>;
   viewer$: Observable<ViewerStateInterface>;
-  bgImage: string;
+  bgImage: UnsplashImageInterface;
   bgImagePool: ViewerStateInterface['bgImagePool'];
   configBarState: ConfigBarStateInterface;
   isConnected = false;
-  UnsplashBgImageCollectionId: '5049158';
+  UnsplashBgImageCollectionId = '5049158';
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -67,7 +66,7 @@ export class ViewerComponent implements OnInit {
     });
 
     this.store.select(selectViewerState).subscribe(vwstate => {
-      this.bgImage = vwstate.bgImage;
+      this.bgImage = vwstate.bgImagePool[vwstate.bgImageIdx];
       this.bgImagePool = vwstate.bgImagePool;
       this.configBarState = vwstate.config;
     });
@@ -88,7 +87,9 @@ export class ViewerComponent implements OnInit {
   }
 
   getBgImageStyle(): string {
-    return `url('${this.bgImage}')`;
+    const bgImageUrl =
+      this.bgImage && this.bgImage.urls ? this.bgImage.urls.full : '';
+    return `url('${bgImageUrl}')`;
   }
 
   getWindowHeightPx(): string {
