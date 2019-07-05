@@ -8,7 +8,7 @@ export const environment = {
     }
   },
   unsplash: {
-    baseUrl: 'https://unsp-api-stg.herokuapp.com',
+    baseUrl: 'https://photo.danielzamorano.pro',
     endpoints: {
       collection: '/collection'
     }
