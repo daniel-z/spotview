@@ -5,7 +5,7 @@
     height: getWindowHeightPx(),
     'background-image': getBgImageStyle()
   }"
-  (window:resize)="onResize($event)"
+  (window:resize)="onResize()"
 >
   <app-config-bar *ngIf="isConnected"></app-config-bar>
   <app-track-display
