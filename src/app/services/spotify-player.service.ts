@@ -6,7 +6,11 @@ import * as PlayerModel from '../components/player/player.model';
 import { Player } from '../components/player/player';
 import { AppStateInterface } from '../store/states/app.state';
 import { selectPlayerState } from '../store/selectors';
-import { PlayerStateChangeAction } from '../store/actions/player.actions';
+import {
+  PlayerStateChangeAction,
+  PlayerNextAction,
+  PlayerPreviousAction
+} from '../store/actions/player.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -67,5 +71,15 @@ export class SpotifyPlayerService {
 
   togglePlay(): void {
     this.player.togglePlay();
+  }
+
+  nextTrack(): void {
+    this.player.nextTrack();
+    this.store.dispatch(new PlayerNextAction());
+  }
+
+  previousTrack(): void {
+    this.player.previousTrack();
+    this.store.dispatch(new PlayerPreviousAction());
   }
 }

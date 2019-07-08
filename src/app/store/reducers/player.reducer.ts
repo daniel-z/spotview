@@ -8,6 +8,8 @@ export function PlayerReducer(
 ) {
   switch (action.type) {
     case PlayerActions.PLAYER_STATE_CHANGE:
+    case PlayerActions.PLAYER_NEXT:
+    case PlayerActions.PLAYER_PREVIOUS:
       return { ...state, ...action.payload };
     default:
       return state;

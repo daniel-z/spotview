@@ -7,7 +7,7 @@
   }"
   (window:resize)="onResize()"
 >
-  <app-config-bar *ngIf="isConnected"></app-config-bar>
+  <app-config-bar *ngIf="isConnected()"></app-config-bar>
   <app-track-display
     *ngIf="isConnected()"
     [trackDisplayData]="getTrackDetails() | async"
@@ -16,5 +16,7 @@
     [onNext]="onNext"
     [onPrevious]="onPrevious"
   ></app-track-display>
-  <app-spotify-connect-leyend *ngIf="!isConnected"></app-spotify-connect-leyend>
+  <app-spotify-connect-leyend
+    *ngIf="!isConnected()"
+  ></app-spotify-connect-leyend>
 </div>

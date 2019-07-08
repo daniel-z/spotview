@@ -9,15 +9,17 @@ export enum PlayerActions {
 
 export class PlayerStateChangeAction implements Action {
   readonly type: string = PlayerActions.PLAYER_STATE_CHANGE;
-  constructor() {}
+  constructor(public payload: PlayerStateInterface) {}
 }
 
 export class PlayerNextAction implements Action {
   readonly type: string = PlayerActions.PLAYER_NEXT;
+  constructor(public payload?: PlayerStateInterface) {}
 }
 
 export class PlayerPreviousAction implements Action {
   readonly type: string = PlayerActions.PLAYER_PREVIOUS;
+  constructor(public payload?: PlayerStateInterface) {}
 }
 
 export type PlayerActionType =

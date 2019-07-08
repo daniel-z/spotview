@@ -54,6 +54,14 @@ export class Player {
     return this.player.togglePlay();
   }
 
+  public nextTrack(): Promise<PromiseConstructor> {
+    return this.player.nextTrack();
+  }
+
+  public previousTrack(): Promise<PromiseConstructor> {
+    return this.player.previousTrack();
+  }
+
   private logMessage({ message }): void {
     console.log(message);
   }

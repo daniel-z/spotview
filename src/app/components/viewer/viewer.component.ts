@@ -119,7 +119,7 @@ export class ViewerComponent implements OnInit {
       return;
     }
 
-    console.log('next');
+    this.spotifyPlayerService.nextTrack();
   }
 
   onPrevious(): void {
@@ -127,6 +127,6 @@ export class ViewerComponent implements OnInit {
       return;
     }
 
-    console.log('previous');
+    this.spotifyPlayerService.previousTrack();
   }
 }
