@@ -1,5 +1,5 @@
 <div class="track-controlls">
-  <button class="backward">
+  <button class="backward" (click)="onPrevious()">
     <i class="fas fa-step-backward"></i>
   </button>
   <button *ngIf="isPaused" class="toggle-play" (click)="onTogglePlay()">
@@ -8,7 +8,7 @@
   <button *ngIf="!isPaused" class="toggle-play" (click)="onTogglePlay()">
     <i class="fas fa-pause"></i>
   </button>
-  <button>
+  <button class="forward" (click)="onNext()">
     <i class="fas fa-step-forward"></i>
   </button>
 </div>

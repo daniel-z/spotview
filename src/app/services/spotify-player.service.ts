@@ -64,4 +64,8 @@ export class SpotifyPlayerService {
     // type: player_state_changed
     this.store.dispatch(new PlayerStateChangeAction(playerState));
   }
+
+  togglePlay(): void {
+    this.player.togglePlay();
+  }
 }

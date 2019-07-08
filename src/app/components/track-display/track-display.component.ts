@@ -12,6 +12,8 @@ export class TrackDisplayComponent implements OnInit {
   @Input() trackDisplayData: TrackDisplay.TrackDisplayInterface =
     TrackDisplay.InitialTrackDisplayState;
   @Input() onTogglePlay: () => {};
+  @Input() onNext: () => {};
+  @Input() onPrevious: () => {};
   @Input() isPaused: boolean;
 
   constructor(private changeDetector: ChangeDetectorRef) {}

@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { PlayerStateInterface } from '../player/player.model';
-import { Player } from '../player/player';
 import { TrackDisplayInterface } from '../track-display/track-display.model';
 import { ViewerStateInterface } from './viewer.model';
 import { SpotifyPlayerService } from '../../services/spotify-player.service';
@@ -27,7 +26,6 @@ import { UnsplashImageInterface } from 'src/app/models/unsplash-image.model';
 })
 export class ViewerComponent implements OnInit {
   private token = '';
-  private player: Player;
   windowRef: any = window;
   playerName = 'Vision Player';
   playerData: PlayerStateInterface;
@@ -36,7 +34,6 @@ export class ViewerComponent implements OnInit {
   bgImage: UnsplashImageInterface;
   bgImagePool: ViewerStateInterface['bgImagePool'];
   configBarState: ConfigBarStateInterface;
-  isConnected = false;
   UnsplashBgImageCollectionId = '5049158';
 
   constructor(
@@ -47,6 +44,8 @@ export class ViewerComponent implements OnInit {
     private store: Store<AppStateInterface>
   ) {
     this.onTogglePlay = this.onTogglePlay.bind(this);
+    this.onPrevious = this.onPrevious.bind(this);
+    this.onNext = this.onNext.bind(this);
   }
 
   ngOnInit() {
@@ -62,7 +61,6 @@ export class ViewerComponent implements OnInit {
 
     this.store.select(selectPlayerState).subscribe(playerData => {
       this.playerData = playerData;
-      this.isConnected = this.spotifyPlayerService.isConnected();
     });
 
     this.store.select(selectViewerState).subscribe(vwstate => {
@@ -75,7 +73,7 @@ export class ViewerComponent implements OnInit {
   }
 
   createPlayer() {
-    this.player = this.spotifyPlayerService.initializePlayer({
+    this.spotifyPlayerService.initializePlayer({
       token: this.token,
       name: this.playerName,
       windowRef: this.windowRef
@@ -104,11 +102,31 @@ export class ViewerComponent implements OnInit {
     this.changeDetector.detectChanges();
   }
 
+  isConnected(): boolean {
+    return this.spotifyPlayerService.isConnected();
+  }
+
   onTogglePlay(): void {
-    if (!this.player) {
+    if (!this.isConnected()) {
       return;
     }
 
-    this.player.togglePlay();
+    this.spotifyPlayerService.togglePlay();
+  }
+
+  onNext(): void {
+    if (!this.isConnected()) {
+      return;
+    }
+
+    console.log('next');
+  }
+
+  onPrevious(): void {
+    if (!this.isConnected()) {
+      return;
+    }
+
+    console.log('previous');
   }
 }

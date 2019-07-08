@@ -7,6 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TrackControlsComponent implements OnInit {
   @Input() onTogglePlay: () => {};
+  @Input() onNext: () => {};
+  @Input() onPrevious: () => {};
+
   @Input() isPaused: boolean;
 
   constructor() {}

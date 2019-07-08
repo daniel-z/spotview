@@ -9,10 +9,12 @@
 >
   <app-config-bar *ngIf="isConnected"></app-config-bar>
   <app-track-display
-    *ngIf="isConnected"
+    *ngIf="isConnected()"
     [trackDisplayData]="getTrackDetails() | async"
     [isPaused]="playerData.paused"
     [onTogglePlay]="onTogglePlay"
+    [onNext]="onNext"
+    [onPrevious]="onPrevious"
   ></app-track-display>
   <app-spotify-connect-leyend *ngIf="!isConnected"></app-spotify-connect-leyend>
 </div>
