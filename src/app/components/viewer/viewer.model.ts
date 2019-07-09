@@ -14,7 +14,7 @@ export interface ViewerStateInterface {
 }
 
 export const InitialViewerStateInterface: ViewerStateInterface = {
-  bgImageIdx: 0,
+  bgImageIdx: 12,
   bgImagePool: [InitialUnsplashImageState],
   config: InitialConfigBarStateInterface
 };
