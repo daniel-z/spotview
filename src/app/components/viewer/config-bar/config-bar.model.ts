@@ -5,5 +5,5 @@ export interface ConfigBarStateInterface {
 
 export const InitialConfigBarStateInterface: ConfigBarStateInterface = {
   displayAlbumArt: true,
-  albumArtAlwaysVisible: false
+  albumArtAlwaysVisible: true
 };
