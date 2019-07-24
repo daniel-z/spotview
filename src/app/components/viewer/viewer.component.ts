@@ -57,16 +57,19 @@ export class ViewerComponent implements OnInit {
       this.token = authData.access_token;
       this.createPlayer();
       this.getTrackDetails();
+      this.changeDetector.detectChanges();
     });
 
     this.store.select(selectPlayerState).subscribe(playerData => {
       this.playerData = playerData;
+      this.changeDetector.detectChanges();
     });
 
     this.store.select(selectViewerState).subscribe(vwstate => {
       this.bgImage = vwstate.bgImagePool[vwstate.bgImageIdx];
       this.bgImagePool = vwstate.bgImagePool;
       this.configBarState = vwstate.config;
+      this.changeDetector.detectChanges();
     });
 
     this.trackDisplayData$ = this.store.select(selectTrackDisplay);
@@ -103,6 +106,7 @@ export class ViewerComponent implements OnInit {
   }
 
   isConnected(): boolean {
+    console.log('isConnected()', this.spotifyPlayerService.isConnected());
     return this.spotifyPlayerService.isConnected();
   }
 
