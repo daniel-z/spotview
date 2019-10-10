@@ -7,7 +7,7 @@ import { SpotifyAuthService } from './services/spotify-auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'spotyview';
+  title = 'Vision Player';
   player: any;
   constructor(spotifyAuthService: SpotifyAuthService) {}
 }
