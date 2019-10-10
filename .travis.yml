@@ -24,9 +24,7 @@ deploy:
 env:
   global:
     - KEY_PATH="deployuser"
-    - SERVER=68.183.160.56
-    - REMOTE_REPO_PATH="/var/www/visionplayer"
-    - DEPLOY_USER="deploy"
+    - REMOTE_REPO="deployuser@68.183.160.56:/var/www/visionplayer"
     - GIT_USERNAME="Travis CI"
     - GIT_EMAIL="travis@danielzamorano.pro"
     - GIT_COMMIT_MESSAGE="New Deploy"

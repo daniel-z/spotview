@@ -7,9 +7,9 @@ if [ $TRAVIS_BRANCH == "master" ] ; then
     # setup ssh agent, git config and remote
     eval "$(ssh-agent -s)"
     ssh-add $KEY_PATH
-    git remote add deploy "$DEPLOY_USER@$REMOTE_REPO:$REMOTE_REPO_PATH"
-    git config user.name $GIT_USERNAME
-    git config user.email $GIT_EMAIL
+    git remote add deploy $REMOTE_REPO
+    git config user.name "$GIT_USERNAME"
+    git config user.email "$GIT_EMAIL"
 
     # commit compressed files and push it to remote
     rm -f .gitignore
