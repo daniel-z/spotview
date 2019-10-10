@@ -30,3 +30,4 @@ env:
     - GIT_USERNAME="Travis CI"
     - GIT_EMAIL="travis@danielzamorano.pro"
     - GIT_COMMIT_MESSAGE="New Deploy"
+    - DEPLOY_FOLDER="dist/"

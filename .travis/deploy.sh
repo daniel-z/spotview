@@ -14,7 +14,7 @@ if [ $TRAVIS_BRANCH == "master" ] ; then
     # commit compressed files and push it to remote
     rm -f .gitignore
     cp .travis/deployignore .gitignore
-    git add build/
+    git add $DEPLOY_FOLDER
     git status # debug
     git commit -m $GIT_COMMIT_MESSAGE
     git push -f deploy HEAD:master
