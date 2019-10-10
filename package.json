@@ -6,7 +6,7 @@
     "start": "ng serve --ssl true --ssl-cert ssl/server.crt --ssl-key ssl/server.key --port 3000",
     "play": "ng serve --ssl true --ssl-cert ssl/server.crt --ssl-key ssl/server.key --port 5000",
     "build": "ng build",
-    "test": "ng test",
+    "test": "ng test --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

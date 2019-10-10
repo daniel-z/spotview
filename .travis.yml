@@ -2,15 +2,19 @@ language: node_js
 node_js:
   - 10.15.1
 cache: npm
+sudo: true
 addons:
+  chrome: stable
   ssh_known_hosts: 68.183.160.56
 before_install:
   - openssl aes-256-cbc -K $encrypted_00710b913eb2_key -iv $encrypted_00710b913eb2_iv
     -in deployuser.enc -out .travis/deployuser -d
   - chmod 700 .travis/deployuser
-script:
-  - ng test
-  - ng build
+before_script:
+  - npm install -g @angular/cli
+  script:
+  - npm run test
+  - npm run build
 deploy:
   skip_cleanup: true
   provider: script
