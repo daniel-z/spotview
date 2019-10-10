@@ -7,7 +7,6 @@ if [ $TRAVIS_BRANCH == "master" ] ; then
     # setup ssh agent, git config and remote
     eval "$(ssh-agent -s)"
     ssh-add $KEY_PATH
-    ls -l
     git remote add deploy "$DEPLOY_USER@$REMOTE_REPO:$REMOTE_REPO_PATH"
     git config user.name $GIT_USERNAME
     git config user.email $GIT_EMAIL
