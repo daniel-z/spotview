@@ -9,7 +9,7 @@ addons:
 before_install:
   - openssl aes-256-cbc -K $encrypted_00710b913eb2_key -iv $encrypted_00710b913eb2_iv
     -in deployuser.enc -out deployuser -d
-  - chmod 700 deployuser
+  - chmod 600 deployuser
 before_script:
   - npm install -g @angular/cli
 script:
@@ -23,8 +23,8 @@ deploy:
     branch: master
 env:
   global:
-    - KEY_PATH="deployuser"
-    - REMOTE_REPO="deployuser@68.183.160.56:/var/www/visionplayer"
+    - KEY_PATH="./deployuser"
+    - REMOTE_REPO="deploy@68.183.160.56:/var/www/visionplayer"
     - GIT_USERNAME="Travis CI"
     - GIT_EMAIL="travis@danielzamorano.pro"
     - GIT_COMMIT_MESSAGE="New Deploy"
