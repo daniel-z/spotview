@@ -16,7 +16,7 @@ if [ $TRAVIS_BRANCH == "master" ] ; then
     cp .travis/deployignore .gitignore
     git add $DEPLOY_FOLDER
     git status # debug
-    git commit -m $GIT_COMMIT_MESSAGE
+    git commit -m "$GIT_COMMIT_MESSAGE"
     git push -f deploy HEAD:master
 else
     echo "No deploy script for branch '$TRAVIS_BRANCH'"
