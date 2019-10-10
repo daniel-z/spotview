@@ -8,8 +8,8 @@ addons:
   ssh_known_hosts: 68.183.160.56
 before_install:
   - openssl aes-256-cbc -K $encrypted_00710b913eb2_key -iv $encrypted_00710b913eb2_iv
-    -in deployuser.enc -out .travis/deployuser -d
-  - chmod 700 .travis/deployuser
+    -in deployuser.enc -out deployuser -d
+  - chmod 700 deployuser
 before_script:
   - npm install -g @angular/cli
 script:
@@ -23,7 +23,7 @@ deploy:
     branch: master
 env:
   global:
-    - KEY_PATH=".travis/deployuser"
+    - KEY_PATH="deployuser"
     - SERVER=68.183.160.56
     - REMOTE_REPO_PATH="/var/www/visionplayer"
     - DEPLOY_USER="deploy"
